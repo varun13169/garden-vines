@@ -1,0 +1,38 @@
+.pageWrap {
+  width: 100%;
+  height: 100vh;
+  display: grid;
+  grid-auto-columns: 15rem 15rem 1fr 1fr 1fr 1fr;
+  grid-auto-rows: 7.5rem 50% auto;
+  grid-template-areas:
+    "p_nav p_nav p_nav p_nav p_nav p_nav"
+    "p_header p_header p_header p_header p_header p_header"
+    "p_content p_content p_content p_content p_content p_content";
+}
+
+.pageNav {
+  width: 100%;
+  height: 100%;
+  grid-area: p_nav;
+
+  color: aqua;
+}
+
+.pageHeader {
+  grid-area: p_header;
+  background-color: red;
+}
+
+.pageMain {
+  grid-area: p_content;
+  background-color: green;
+}
+
+.promo-catagory-holder {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+  padding: 2rem;
+}

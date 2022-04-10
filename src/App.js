@@ -1,10 +1,10 @@
+import { Homepage } from "./pages";
 import "./styles.css";
 
 export default function App() {
   return (
     <div className="App">
-      <h1>Hello</h1>
-      <h2>Start editing !</h2>
+      <Homepage></Homepage>
     </div>
   );
 }
