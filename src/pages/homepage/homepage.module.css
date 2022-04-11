@@ -20,12 +20,11 @@
 
 .pageHeader {
   grid-area: p_header;
-  background-color: red;
 }
 
 .pageMain {
   grid-area: p_content;
-  background-color: green;
+  padding: 1rem 0rem 1rem 0rem;
 }
 
 .promo-catagory-holder {

@@ -12,12 +12,13 @@ import { useNavigate } from "react-router";
 export default function Navbar() {
   // const { auth, checkValidTokenAndSetAuth } = useAuth();
   // const { isSignnedIn, token } = auth;
+  const isSignnedIn = false;
   const navigate = useNavigate();
 
   // const { wishlist, setWishlist } = useWishlist();
+  const wishlist = [];
   // const { theme, setTheme } = useTheme();
   // console.log(theme);
-  const isSignnedIn = true;
 
   return (
     <nav className="dui-nav-sch-act">

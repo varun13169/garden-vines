@@ -1,0 +1,129 @@
+/* Carousal */
+
+/* Slideshow container */
+.slideshow-container {
+  height: 100%;
+  position: relative;
+  margin: auto;
+}
+
+/* Hide the slide by default */
+.slideshow-container__slide {
+  height: 100%;
+  overflow: hidden;
+  padding-left: 5rem;
+  padding-right: 5rem;
+}
+
+.slideshow-container__slide > img {
+  width: 100%;
+  height: 100%;
+  object-fit: none;
+}
+
+/* Common properties of Next & Prev buttons */
+.slideshow-container__action-prev,
+.slideshow-container__action-next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  margin-top: -2.2rem;
+  padding: 1.6rem;
+  color: var(--dui-light-theme-contrast-txt);
+  transition: 0.6s ease;
+  user-select: none;
+}
+/* Position the "next button" to the right */
+.slideshow-container__action-next {
+  right: 0rem;
+  border-radius: 3px 0px 0px 3px;
+}
+/* Position the "prev button" to the left */
+.slideshow-container__action-prev {
+  left: 0rem;
+  border-radius: 0px 3px 3px 0px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.slideshow-container__action-prev:hover,
+.slideshow-container__action-next:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+  color: var(--dui-light-theme-txt);
+}
+
+/* Caption text */
+.slideshow-container__slide-caption {
+  color: var(--dui-primary-color-p2-lgt-35pct);
+  font-size: 1.5rem;
+  padding: 0.8rem 1.2rem;
+  position: absolute;
+  bottom: 0.8rem;
+  width: 100%;
+  text-align: center;
+}
+
+/* Number text (1/3 etc) */
+.slideshow-container__slide-number {
+  color: var(--dui-primary-color-p2-lgt-35pct);
+  font-size: 1.2rem;
+  padding: 0.8rem 1.2rem;
+  position: absolute;
+  top: 0rem;
+}
+
+/* varundev */
+.slideshow-container__navigator-container {
+  position: absolute;
+  bottom: 0rem;
+  width: 100%;
+}
+
+/* The dots/bullets/indicators */
+.slideshow-container__navigator {
+  cursor: pointer;
+  height: 1.5rem;
+  width: 1.5rem;
+  margin: 0px 2px;
+  /* ToDo: try more lighter shade of p2 13% or 15% */
+  background-color: var(--dui-primary-color-p2-lgt-10pct);
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+.slideshow-container__navigator--active,
+.slideshow-container__navigator:hover {
+  /* ToDo: try more darker shade of p2 15% */
+  background-color: var(--dui-primary-color-p2-dkr-20pct);
+}
+
+/* Fading animation */
+.fade {
+  -webkit-animation-name: fade;
+  -webkit-animation-duration: 1.5s;
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@-webkit-keyframes fade {
+  from {
+    opacity: 0.4;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fade {
+  from {
+    opacity: 0.4;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+/* Carousal */
