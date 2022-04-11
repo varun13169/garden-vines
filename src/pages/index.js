@@ -1,3 +1,4 @@
 import Homepage from "./homepage/Homepage";
+import WatchLaterPage from "./WatchLaterPage/WatchLaterPage";
 
-export { Homepage };
+export { Homepage, WatchLaterPage };

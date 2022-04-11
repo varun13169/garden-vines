@@ -1,10 +1,14 @@
-import { Homepage } from "./pages";
+import { Route, Routes } from "react-router-dom";
+import { Homepage, WatchLaterPage } from "./pages";
 import "./styles.css";
 
 export default function App() {
   return (
     <div className="App">
-      <Homepage></Homepage>
+      <Routes>
+        <Route path="/" element={<Homepage />}></Route>
+        <Route path="/watch-later" element={<WatchLaterPage />}></Route>
+      </Routes>
     </div>
   );
 }
