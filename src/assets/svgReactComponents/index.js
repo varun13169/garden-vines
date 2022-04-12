@@ -6,6 +6,7 @@ import SearchSVG from "./SearchSVG";
 import ShoppingCartSVG from "./ShoppingCartSVG";
 import SunSVG from "./SunSVG";
 import MoonSVG from "./MoonSVG";
+import WatchLaterSVG from "./WatchLaterSVG";
 
 export {
   FilterSVG,
@@ -16,4 +17,5 @@ export {
   ShoppingCartSVG,
   MoonSVG,
   SunSVG,
+  WatchLaterSVG,
 };

@@ -4,41 +4,22 @@ import { Link, useLocation } from "react-router-dom";
 // import { useCart, useWishlist } from "../../contexts";
 
 export default function Card({ itemCardData }) {
+  console.log(itemCardData);
   itemCardData = {
-    itemDetails: {
-      _id: "qwer",
-      productName: "desc",
-      productImg:
-        "https://res.cloudinary.com/duepvqb5b/image/upload/v1648206129/gardenkart-products/products/annie-spratt-vsnISjCT2hY-unsplash_vz0tt4.jpg",
-      isOutOfStock: false,
-      isOnSale: true,
-      originalPrice: 22,
-      salePrice: 22,
-      discountedPctage: 22,
-      qty: 1,
-    },
+    ...itemCardData,
     priAction: { name: "Watch Later", action: () => {} },
     secAction: () => {},
     wishlistAction: () => {},
   };
-  const { itemDetails, priAction, secAction, wishlistAction } = itemCardData;
+
+  const { videoDetails, priAction, secAction, wishlistAction } = itemCardData;
 
   //   const { cart, setCart } = useCart();
   //   const { wishlist, setWishlist } = useWishlist();
   const cart = [];
   const wishlist = [];
 
-  const {
-    _id,
-    productName,
-    productImg,
-    isOutOfStock,
-    isOnSale,
-    originalPrice,
-    salePrice,
-    discountedPctage,
-    qty,
-  } = itemDetails;
+  const { _id, title, thumbnail, description } = videoDetails;
 
   const isProductInCart =
     cart.filter((cartProduct) => {
@@ -55,25 +36,31 @@ export default function Card({ itemCardData }) {
   return (
     <div className="dui-card-prod-hzntl dui-util-bdr-radi-5px-s dui-util-gry-shdw dui-util-pos-rel">
       <div className="dui-card-prod-hzntl__img-container">
-        <img className="dui-card-prod-hzntl__img" src={productImg} alt="" />
-        {isOutOfStock && (
-          <div className="dui-card-prod-hzntl__img-prod-status">
-            <p className="dui-light-theme-txt">OUT OF STOCK</p>
-          </div>
-        )}
+        <img className="dui-card-prod-hzntl__img" src={thumbnail} alt="" />
       </div>
 
       <div className="dui-card-prod-hzntl__info">
         {/* <p className="dui-card-prod-hzntl__secondary-text">{productName}</p> */}
-        <h3 className="dui-card-prod-hzntl__primary-text dui-util-fw-blk dui-util-txt-align-left">
-          ${salePrice}{" "}
-          {/* <s className="dui-card-prod-hzntl__secondary-text dui-util-txt-sm">
-            ${originalPrice}
-          </s> */}
+        <h3
+          className="dui-card-prod-hzntl__primary-text dui-util-fw-blk dui-util-txt-align-left"
+          style={{
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+            whiteSpace: "nowrap",
+          }}
+        >
+          {title}
         </h3>
 
-        <p className="dui-card-prod-hzntl__secondary-text dui-util-txt-align-left">
-          {productName}
+        <p
+          className="dui-card-prod-hzntl__secondary-text dui-util-txt-align-left"
+          style={{
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+            whiteSpace: "nowrap",
+          }}
+        >
+          {description}
         </p>
         {/* <p className="dui-card-prod-hzntl__secondary-text dui-util-txt-sm dui-util-spc-pad-0_8rem-xs dui-util-fw-sbld">
           {discountedPctage}% OFF
@@ -82,7 +69,7 @@ export default function Card({ itemCardData }) {
 
       <div className="dui-card-prod-hzntl__actions">
         <div className="dui-card-prod-hzntl__buttons">
-          {pathname === "/" && (
+          {pathname === "/videos" && (
             <button
               className="product-card-btn dui-btn dui-btn--primary dui-util-txt-sm dui-util-spc-pad-0_8rem-xs reset-button-inherit-parent"
               onClick={() => priAction.action(itemDetails)}
