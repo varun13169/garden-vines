@@ -1,21 +1,19 @@
 import "./card.css";
 import { BinSVG, WishlistHeartSVG } from "../../assets/svgReactComponents";
 import { Link, useLocation } from "react-router-dom";
+import { useWatchLater } from "../../contexts";
 // import { useCart, useWishlist } from "../../contexts";
 
 export default function Card({ itemCardData }) {
-  console.log(itemCardData);
   itemCardData = {
     ...itemCardData,
-    priAction: { name: "Watch Later", action: () => {} },
+    // priAction: { name: "Watch Later", action: () => {} },
     secAction: () => {},
     wishlistAction: () => {},
   };
 
   const { videoDetails, priAction, secAction, wishlistAction } = itemCardData;
 
-  //   const { cart, setCart } = useCart();
-  //   const { wishlist, setWishlist } = useWishlist();
   const cart = [];
   const wishlist = [];
 
@@ -23,12 +21,12 @@ export default function Card({ itemCardData }) {
 
   const isProductInCart =
     cart.filter((cartProduct) => {
-      return itemDetails._id === cartProduct._id;
+      return videoDetails._id === cartProduct._id;
     }).length !== 0;
 
   const isProductInWishlist =
     wishlist.filter((wishlistProduct) => {
-      return itemDetails._id === wishlistProduct._id;
+      return videoDetails._id === wishlistProduct._id;
     }).length !== 0;
 
   const { pathname } = useLocation();
@@ -72,7 +70,7 @@ export default function Card({ itemCardData }) {
           {pathname === "/videos" && (
             <button
               className="product-card-btn dui-btn dui-btn--primary dui-util-txt-sm dui-util-spc-pad-0_8rem-xs reset-button-inherit-parent"
-              onClick={() => priAction.action(itemDetails)}
+              onClick={() => priAction.action(videoDetails)}
             >
               {priAction.name}
             </button>
