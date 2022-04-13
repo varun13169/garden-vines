@@ -2,12 +2,10 @@ import "./card.css";
 import { BinSVG, WishlistHeartSVG } from "../../assets/svgReactComponents";
 import { Link, useLocation } from "react-router-dom";
 import { useWatchLater } from "../../contexts";
-// import { useCart, useWishlist } from "../../contexts";
 
 export default function Card({ itemCardData }) {
   itemCardData = {
     ...itemCardData,
-    // priAction: { name: "Watch Later", action: () => {} },
     secAction: () => {},
     wishlistAction: () => {},
   };

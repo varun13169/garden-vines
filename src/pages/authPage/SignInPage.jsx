@@ -17,7 +17,7 @@ export default function SiginInPage() {
     res: null,
   });
 
-  const { auth, checkValidTokenAndSetAuth } = useAuth();
+  const { authState, checkValidTokenAndSetAuth } = useAuth();
   const navigate = useNavigate();
 
   return (

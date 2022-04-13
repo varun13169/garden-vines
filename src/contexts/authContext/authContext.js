@@ -3,19 +3,22 @@ import { useState, useContext, createContext } from "react";
 const AuthContext = createContext();
 
 const AuthContextProvider = ({ children }) => {
-  const [auth, setAuth] = useState({ isSignnedIn: false, token: null });
+  const [authState, setAuthState] = useState({
+    isSignnedIn: false,
+    token: null,
+  });
 
   const checkValidTokenAndSetAuth = () => {
     const localStorageToken = localStorage.getItem("token");
     if (localStorageToken != null) {
-      setAuth((auth) => ({
-        ...auth,
+      setAuthState((authState) => ({
+        ...authState,
         isSignnedIn: true,
         token: localStorageToken,
       }));
     } else {
-      setAuth((auth) => ({
-        ...auth,
+      setAuthState((authState) => ({
+        ...authState,
         isSignnedIn: false,
         token: localStorageToken,
       }));
@@ -23,7 +26,7 @@ const AuthContextProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ auth, checkValidTokenAndSetAuth }}>
+    <AuthContext.Provider value={{ authState, checkValidTokenAndSetAuth }}>
       {children}
     </AuthContext.Provider>
   );
