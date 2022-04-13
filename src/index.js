@@ -4,7 +4,11 @@ import { BrowserRouter } from "react-router-dom";
 import { makeServer } from "./server";
 
 import App from "./App";
-import { VideosContextProvider, WatchLaterContextProvider } from "./contexts";
+import {
+  AuthContextProvider,
+  VideosContextProvider,
+  WatchLaterContextProvider,
+} from "./contexts";
 import axios from "axios";
 // Call make Server
 makeServer();
@@ -31,11 +35,13 @@ const rootElement = document.getElementById("root");
 ReactDOM.render(
   <StrictMode>
     <BrowserRouter>
-      <VideosContextProvider>
-        <WatchLaterContextProvider>
-          <App />
-        </WatchLaterContextProvider>
-      </VideosContextProvider>
+      <AuthContextProvider>
+        <VideosContextProvider>
+          <WatchLaterContextProvider>
+            <App />
+          </WatchLaterContextProvider>
+        </VideosContextProvider>
+      </AuthContextProvider>
     </BrowserRouter>
   </StrictMode>,
   rootElement

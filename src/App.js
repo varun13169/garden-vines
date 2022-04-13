@@ -1,5 +1,12 @@
 import { Route, Routes } from "react-router-dom";
-import { Homepage, VideoListingPage, WatchLaterPage } from "./pages";
+import {
+  Homepage,
+  SignInPage,
+  SignOutPage,
+  SignUpPage,
+  VideoListingPage,
+  WatchLaterPage,
+} from "./pages";
 
 import MockAPI from "./mockman/MockAPI";
 import "./styles.css";
@@ -11,6 +18,9 @@ export default function App() {
         <Route path="/" element={<Homepage />}></Route>
         <Route path="/watch-later" element={<WatchLaterPage />}></Route>
         <Route path="/videos" element={<VideoListingPage />}></Route>
+        <Route path="/signin" element={<SignInPage />}></Route>
+        <Route path="/signup" element={<SignUpPage />}></Route>
+        <Route path="/signout" element={<SignOutPage />}></Route>
 
         <Route path="/mock-api" element={<MockAPI />} />
       </Routes>
