@@ -7,6 +7,10 @@ import {
   WatchLaterContextProvider,
 } from "./watchLaterContext/watchLaterContext";
 import { useAuth, AuthContextProvider } from "./authContext/authContext";
+import {
+  usePlaylist,
+  PlaylistContextProvider,
+} from "./playlistsContext/playlistsContext";
 
 export {
   VideosContextProvider,
@@ -15,4 +19,6 @@ export {
   useWatchLater,
   AuthContextProvider,
   useAuth,
+  PlaylistContextProvider,
+  usePlaylist,
 };

@@ -66,7 +66,7 @@ export default function Navbar() {
                 {/* <!-- SignUp Button --> */}
                 <Link
                   className="dui-nav-sch-act__signup-btn dui-link dui-link--primary dui-util-txt-sm dui-util-spc-pad-0_8rem-xs dui-util-fw-bld"
-                  to="/sign-up"
+                  to="/playlists"
                 >
                   Sign Up
                 </Link>

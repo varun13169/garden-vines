@@ -1,6 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import {
   Homepage,
+  PlaylistPage,
   SignInPage,
   SignOutPage,
   SignUpPage,
@@ -10,6 +11,8 @@ import {
 
 import MockAPI from "./mockman/MockAPI";
 import "./styles.css";
+import { RequiresAuth } from "./components";
+import { useAuth } from "./contexts";
 
 export default function App() {
   return (
@@ -18,6 +21,16 @@ export default function App() {
         <Route path="/" element={<Homepage />}></Route>
         <Route path="/watch-later" element={<WatchLaterPage />}></Route>
         <Route path="/videos" element={<VideoListingPage />}></Route>
+
+        <Route
+          path="/playlists"
+          element={
+            <RequiresAuth>
+              <PlaylistPage />
+            </RequiresAuth>
+          }
+        ></Route>
+
         <Route path="/signin" element={<SignInPage />}></Route>
         <Route path="/signup" element={<SignUpPage />}></Route>
         <Route path="/signout" element={<SignOutPage />}></Route>

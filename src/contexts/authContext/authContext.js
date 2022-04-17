@@ -4,7 +4,7 @@ const AuthContext = createContext();
 
 const AuthContextProvider = ({ children }) => {
   const [authState, setAuthState] = useState({
-    isSignnedIn: false,
+    isSignnedIn: true,
     token: null,
   });
 
