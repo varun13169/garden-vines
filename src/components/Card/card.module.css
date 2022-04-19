@@ -1,0 +1,38 @@
+.card {
+  width: fit-content;
+  height: fit-content;
+
+  display: grid;
+  grid-template-rows: auto auto auto;
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    "card__img"
+    "card__description"
+    "card__actions";
+  background-color: blueviolet;
+}
+
+.card__img-container {
+  grid-area: card__img;
+  width: 30rem;
+  height: 20rem;
+  background-color: black;
+}
+.card__img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  /* aspect-ratio: 4 / 3; */
+}
+
+.card__description {
+  grid-area: card__description;
+}
+
+.card__actions {
+  grid-area: card__actions;
+}
+
+.card__watch-action {
+  width: 100%;
+}

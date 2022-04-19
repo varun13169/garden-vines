@@ -1,0 +1,109 @@
+/* .auth-page-namespace.page-wrap {
+  width: 100%;
+  height: 100vh;
+  background-color: var(--site-bg-color);
+
+  display: grid;
+  grid-auto-columns: 15rem 15rem 1fr 1fr 1fr 1fr;
+  grid-auto-rows: 7.5rem auto auto 7.5rem;
+  grid-template-areas:
+    "p_nav p_nav p_nav p_nav p_nav p_nav"
+    "p_content p_content p_content p_content p_content p_content"
+    "p_content p_content p_content p_content p_content p_content";
+}
+
+.auth-page-namespace.page-nav {
+  grid-area: p_nav;
+}
+
+.auth-page-namespace.page-sidebar {
+  grid-area: p_sidebar;
+  display: none;
+}
+
+.auth-page-namespace.page-main {
+  grid-area: p_content;
+  overflow: auto;
+}
+
+.auth-page-namespace.page-footer {
+  display: none;
+}
+
+.auth-page-namespace.main-content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  overflow: auto;
+} */
+
+/*TODO: move to component library */
+.dui-auth-card {
+  width: fit-content;
+  height: fit-content;
+  padding: 2rem;
+  padding-left: 7.5rem;
+  padding-right: 7.5rem;
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+  margin: 6.4rem 0rem 6.4rem 0rem;
+  background-color: var(--dui-light-theme-bg);
+
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.dui-auth-card__title {
+  text-align: center;
+}
+
+.dui-auth-card__actions {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.dui-auth-card__sub-actions {
+  display: flex;
+}
+
+.dui-auth-card__sub-actions .dui-link {
+  margin-left: 3rem;
+}
+
+.dui-auth-card .dui-inp-txt,
+.dui-auth-card .dui-btn,
+.dui-auth-card .dui-link {
+  width: auto;
+}
+
+.dui-auth-card .dui-link {
+  text-align: center;
+}
+
+.dui-auth-card-logout {
+  align-items: center;
+}
+
+/************  */
+@media only screen and (max-width: 855px) {
+  .auth-page-namespace.page-wrap {
+    grid-auto-rows: 15rem auto auto 7.5rem;
+  }
+}
+
+@media only screen and (max-width: 550px) {
+  html {
+    font-size: 40%;
+  }
+
+  .dui-auth-card__sub-actions {
+    flex-direction: column;
+  }
+
+  .dui-auth-card__sub-actions .dui-link {
+    margin-left: 0rem;
+  }
+}

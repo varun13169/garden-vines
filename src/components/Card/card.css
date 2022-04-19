@@ -1,0 +1,76 @@
+.dui-card-prod-hzntl {
+  width: 30rem;
+  height: fit-content;
+  /* max-width: 40rem; */
+
+  grid-auto-columns: 4fr 4fr;
+  grid-template-areas:
+    "cardImg  cardImg  "
+    "cardInfo  cardInfo  "
+    "cardActions  cardActions ";
+}
+
+.dui-card-prod-hzntl__img-container {
+  padding: 1rem;
+  aspect-ratio: 4 / 3;
+}
+
+.dui-card-prod-hzntl__info {
+  padding: 0rem 1.6rem 0rem 1.6rem;
+}
+
+.dui-card-prod-hzntl__actions {
+  padding: 0.8rem 1.6rem 0.8rem 1.6rem;
+}
+
+.product-card-btn {
+  /* while exiting hover */
+  transition: background-color 0.5s, border-radius 1s;
+}
+
+.product-card-btn:hover:not(:disabled) {
+  border-radius: 999px;
+  /* while entering hover */
+  transition: background-color 0.5s, border-radius 5s;
+}
+
+.product-card-btn:disabled {
+  background-color: var(--dui-primary-color-opc-75pct);
+  /* while entering hover */
+  transition: background-color 0.5s, border-radius 5s;
+}
+
+.product-card-link {
+  /* while exiting hover */
+  transition: background-color 0.5s, border-radius 1s;
+}
+
+.product-card-link:hover {
+  border-radius: 999px;
+  /* while entering hover */
+  transition: background-color 0.5s, border-radius 5s;
+}
+
+.dui-card-prod-hzntl {
+  position: relative;
+}
+
+.dui-card-prod-hzntl__wishlist-btn {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  background-color: var(--dui-light-theme-bg);
+}
+
+.dui-card-prod-hzntl__wishlist-btn_svg {
+  width: 4rem;
+  height: auto;
+}
+
+.dui-card-prod-hzntl__img {
+  width: 100%;
+  aspect-ratio: 4/3;
+  /* height: 24.4rem; */
+  align-items: center;
+  margin: auto;
+}
