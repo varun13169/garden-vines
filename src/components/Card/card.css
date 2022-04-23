@@ -2,6 +2,7 @@
   width: 30rem;
   height: fit-content;
   /* max-width: 40rem; */
+  margin: auto;
 
   grid-auto-columns: 4fr 4fr;
   grid-template-areas:

@@ -11,6 +11,7 @@ import {
   usePlaylist,
   PlaylistContextProvider,
 } from "./playlistsContext/playlistsContext";
+import { useLikes, LikesContextProvider } from "./likesContext/likesContext";
 
 export {
   VideosContextProvider,
@@ -21,4 +22,6 @@ export {
   useAuth,
   PlaylistContextProvider,
   usePlaylist,
+  useLikes,
+  LikesContextProvider,
 };

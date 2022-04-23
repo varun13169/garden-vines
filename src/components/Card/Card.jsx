@@ -1,19 +1,18 @@
 import "./card.css";
 import { BinSVG, WishlistHeartSVG } from "../../assets/svgReactComponents";
 import { Link, useLocation } from "react-router-dom";
-import { useWatchLater } from "../../contexts";
+import { useLikes, useWatchLater } from "../../contexts";
 
 export default function Card({ itemCardData }) {
   itemCardData = {
     ...itemCardData,
     secAction: () => {},
-    wishlistAction: () => {},
   };
 
-  const { videoDetails, priAction, secAction, wishlistAction } = itemCardData;
+  const { videoDetails, priAction, secAction, likeAction } = itemCardData;
 
   const cart = [];
-  const wishlist = [];
+  const { likesState, setLikesState } = useLikes();
 
   const { _id, title, thumbnail, description } = videoDetails;
 
@@ -22,9 +21,9 @@ export default function Card({ itemCardData }) {
       return videoDetails._id === cartProduct._id;
     }).length !== 0;
 
-  const isProductInWishlist =
-    wishlist.filter((wishlistProduct) => {
-      return videoDetails._id === wishlistProduct._id;
+  const isInLikedVideos =
+    likesState.likes.filter((likedVideo) => {
+      return videoDetails._id === likedVideo._id;
     }).length !== 0;
 
   const { pathname } = useLocation();
@@ -123,9 +122,9 @@ export default function Card({ itemCardData }) {
       {/* <!-- Button Component Starts -- Icon --> */}
       <button
         className="dui-card-prod-hzntl__wishlist-btn dui-btn dui-util-bdr-radi-999px-mx reset-button-inherit-parent"
-        onClick={() => wishlistAction.action(itemDetails)}
+        onClick={() => likeAction.action(videoDetails)}
       >
-        {wishlistAction.isProductInWishlist && (
+        {likeAction.isInLikedVideos && (
           <WishlistHeartSVG
             className="dui-card-prod-hzntl__wishlist-btn_svg dui-util-spc-pad-0_8rem-xs"
             height="1rem"
@@ -136,7 +135,7 @@ export default function Card({ itemCardData }) {
             strokeLinejoin="round"
           ></WishlistHeartSVG>
         )}
-        {!wishlistAction.isProductInWishlist && (
+        {!likeAction.isInLikedVideos && (
           <WishlistHeartSVG
             className="dui-card-prod-hzntl__wishlist-btn_svg dui-util-spc-pad-0_8rem-xs"
             height="1rem"
