@@ -15,6 +15,8 @@ export default function Card({ itemCardData }) {
   const { likesState, setLikesState } = useLikes();
 
   const { _id, title, thumbnail, src, description } = videoDetails;
+  console.log("Card");
+  console.log(videoDetails);
 
   const isProductInCart =
     cart.filter((cartProduct) => {
@@ -32,14 +34,20 @@ export default function Card({ itemCardData }) {
     <div className="dui-card-prod-hzntl dui-util-bdr-radi-5px-s dui-util-gry-shdw dui-util-pos-rel">
       <div className="dui-card-prod-hzntl__img-container">
         {/* <img className="dui-card-prod-hzntl__img" src={thumbnail} alt="" /> */}
-        <iframe
-          className="dui-card-prod-hzntl__img"
-          src={src}
-          title="YouTube video player"
-          frameBorder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-        ></iframe>
+        <Link
+          className={`dui-link`}
+          to={`/video/${_id}`}
+          style={{ width: "fit-content", height: "fit-content" }}
+        >
+          <iframe
+            className="dui-card-prod-hzntl__img"
+            src={src}
+            title="YouTube video player"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          ></iframe>
+        </Link>
       </div>
 
       <div className="dui-card-prod-hzntl__info">
@@ -72,7 +80,7 @@ export default function Card({ itemCardData }) {
 
       <div className="dui-card-prod-hzntl__actions">
         <div className="dui-card-prod-hzntl__buttons">
-          {pathname === "/videos" && (
+          {pathname === "/" && (
             <button
               className="product-card-btn dui-btn dui-btn--primary dui-util-txt-sm dui-util-spc-pad-0_8rem-xs reset-button-inherit-parent"
               onClick={() => priAction.action(videoDetails)}

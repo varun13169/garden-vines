@@ -1,7 +1,7 @@
 import styles from "./playlistPage.module.css";
 
 import React from "react";
-import { Navbar } from "../../components";
+import { Navbar, Sidebar } from "../../components";
 import { useState, useEffect } from "react";
 import { usePlaylist } from "../../contexts";
 import { BinSVG } from "../../assets/svgReactComponents";
@@ -28,6 +28,9 @@ export default function PlaylistPage() {
     <section className={`${styles[`page-wrap`]}`}>
       <section className={`${styles[`page-nav`]}`}>
         <Navbar></Navbar>
+      </section>
+      <section className={`${styles[`page-sidebar`]}`}>
+        <Sidebar></Sidebar>
       </section>
       <section className={`${styles["page-main"]}`}>
         <div

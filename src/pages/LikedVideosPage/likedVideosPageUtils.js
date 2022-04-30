@@ -1,84 +1,5 @@
 import axios from "axios";
-
-const removeFromLikedVideosAndSetLikedState = ({
-  videoDetails,
-  likesState,
-  setLikesState,
-}) => {
-  setLikesState({
-    type: "UPDATE_LIKES_LIST",
-    data: {
-      likes: likesState.likes.filter((e) => {
-        return e._id !== videoDetails._id;
-      }),
-    },
-  });
-
-  let config = {
-    headers: {
-      Accept: "*/*",
-      authorization: localStorage.getItem("token"),
-    },
-  };
-  (async () => {
-    try {
-      let res = await axios.delete(
-        "/api/user/likes/" + videoDetails._id,
-        config
-      );
-      // TODO: base on update API
-      // setWishlist((wishlist) => res.data.wishlist);
-    } catch (err) {
-      console.log(err);
-    }
-  })();
-};
-
-const removeFromLikedVideos = ({ likesState, setLikesState }) => {
-  return (videoDetails) => {
-    removeFromLikedVideosAndSetLikedState({
-      videoDetails,
-      likesState,
-      setLikesState,
-    });
-  };
-};
-
-const addToLikedVideosAndSetLikedState = ({
-  itemDetails,
-  likesState,
-  setLikesState,
-}) => {
-  setLikesState({
-    type: "UPDATE_LIKES_LIST",
-    data: {
-      likes: [...likesState.likes, itemDetails],
-    },
-  });
-
-  let config = {
-    headers: {
-      Accept: "*/*",
-      authorization: localStorage.getItem("token"),
-    },
-  };
-  let payload = { video: itemDetails };
-  (async () => {
-    let res = await axios.post("/api/user/likes", payload, config);
-    // TODO: base on update API
-    // setWishlist((wishlist) => res.data.wishlist);
-  })();
-};
-
-const addToLikedVideos = ({ likesState, setLikesState }) => {
-  return (itemDetails) => {
-    addToLikedVideosAndSetLikedState({
-      itemDetails,
-      likesState,
-      setLikesState,
-    });
-  };
-};
+import { useAxios } from "../../customHooks";
 
 /**
  * Remove From Wishlist And Set Wishlist
@@ -182,6 +103,92 @@ const addToWatchLater = ({ watchLaterState, setWatchLaterState }) => {
   };
 };
 
+/**
+ * Add To Liked And Set LikedState
+ * @param {Object} Object
+ */
+const addToLikedVideosAndSetLikedState = ({
+  itemDetails,
+  likesState,
+  setLikesState,
+}) => {
+  setLikesState({
+    type: "UPDATE_LIKES_LIST",
+    data: {
+      likes: [...likesState.likes, itemDetails],
+    },
+  });
+
+  let config = {
+    headers: {
+      Accept: "*/*",
+      authorization: localStorage.getItem("token"),
+    },
+  };
+  let payload = { video: itemDetails };
+  (async () => {
+    let res = await axios.post("/api/user/likes", payload, config);
+    // TODO: base on update API
+    // setWishlist((wishlist) => res.data.wishlist);
+  })();
+};
+
+const addToLikedVideos = ({ likesState, setLikesState }) => {
+  return (itemDetails) => {
+    addToLikedVideosAndSetLikedState({
+      itemDetails,
+      likesState,
+      setLikesState,
+    });
+  };
+};
+
+//
+const removeFromLikedVideosAndSetLikedState = ({
+  videoDetails,
+  likesState,
+  setLikesState,
+}) => {
+  setLikesState({
+    type: "UPDATE_LIKES_LIST",
+    data: {
+      likes: likesState.likes.filter((e) => {
+        return e._id !== videoDetails._id;
+      }),
+    },
+  });
+
+  let config = {
+    headers: {
+      Accept: "*/*",
+      authorization: localStorage.getItem("token"),
+    },
+  };
+  (async () => {
+    try {
+      let res = await axios.delete(
+        "/api/user/likes/" + videoDetails._id,
+        config
+      );
+      // TODO: base on update API
+      // setWishlist((wishlist) => res.data.wishlist);
+    } catch (err) {
+      console.log(err);
+    }
+  })();
+};
+
+const removeFromLikedVideos = ({ likesState, setLikesState }) => {
+  return (videoDetails) => {
+    removeFromLikedVideosAndSetLikedState({
+      videoDetails,
+      likesState,
+      setLikesState,
+    });
+  };
+};
+//
+
 const getItemCardData = ({
   videoDetails,
   watchLaterState,
@@ -189,15 +196,8 @@ const getItemCardData = ({
   likesState,
   setLikesState,
 }) => {
-  console.log("Varunde: spv");
-  console.log(watchLaterState);
-
   const isVideoInWatchLater =
     watchLaterState.watchLater.filter((video) => {
-      console.log(video);
-      console.log(video._id);
-      console.log(videoDetails._id);
-      console.log(videoDetails._id === video._id);
       return videoDetails._id === video._id;
     }).length !== 0;
 
@@ -231,10 +231,4 @@ const getItemCardData = ({
   return res;
 };
 
-export {
-  addToWatchLater,
-  removeFromWatchLater,
-  addToLikedVideos,
-  removeFromLikedVideos,
-  getItemCardData,
-};
+export { getItemCardData };

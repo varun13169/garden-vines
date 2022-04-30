@@ -6,6 +6,7 @@ import SignUpPage from "./authPage/SignUpPage";
 import SignOutPage from "./authPage/SignOutPage";
 import PlaylistPage from "./playlistPage/PlaylistPage";
 import SingleVideoPage from "./SingleVideoPage/SingleVideoPage";
+import LikedVideosPage from "./LikedVideosPage/LikedVideosPage";
 
 export {
   Homepage,
@@ -16,4 +17,5 @@ export {
   SignUpPage,
   SignOutPage,
   SingleVideoPage,
+  LikedVideosPage,
 };

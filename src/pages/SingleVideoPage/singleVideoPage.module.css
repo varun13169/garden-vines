@@ -1,15 +1,27 @@
+:root {
+  --site-bg-color: #f7f7f7;
+}
+
+.dark-theme {
+  --dui-light-theme-bg: #000000;
+  --dui-light-theme-contrast-txt: #ffffff;
+  --site-bg-color: #374151;
+}
+
 .page-wrap {
   width: 100%;
   height: 100vh;
 
+  background-color: var(--site-bg-color);
+
   display: grid;
-  grid-auto-columns: 1fr 40rem;
+  grid-auto-columns: 25rem 1fr;
   grid-auto-rows: 7.5rem auto auto;
 
   grid-template-areas:
     "p_nav p_nav"
-    "p_content p_sidebar"
-    "p_content p_sidebar";
+    "p_sidebar p_content"
+    "p_sidebar p_content";
 }
 
 .page-nav {

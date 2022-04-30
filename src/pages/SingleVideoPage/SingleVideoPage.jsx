@@ -1,7 +1,7 @@
 import React from "react";
 import { WatchLaterSVG } from "../../assets/svgReactComponents";
 import LikeSVG from "../../assets/svgReactComponents/LikeSVG";
-import { Card, Navbar } from "../../components";
+import { Card, Navbar, Sidebar } from "../../components";
 import { useParams } from "react-router-dom";
 
 import styles from "./singleVideoPage.module.css";
@@ -100,6 +100,9 @@ export default function SingleVideoPage() {
       <section className={`${styles[`page-nav`]}`}>
         <Navbar></Navbar>
       </section>
+      <section className={`${styles[`page-sidebar`]}`}>
+        <Sidebar></Sidebar>
+      </section>
       <section className={`${styles[`page-main`]}`}>
         <div
           className={``}
@@ -171,14 +174,17 @@ export default function SingleVideoPage() {
           </div>
         </div>
       </section>
-      <section className={`${styles[`page-sidebar`]}`}>
+      {/* <section className={`${styles[`page-sidebar`]}`}>
         <p>Watch Later</p>
 
         <div className={`${styles[`watch-later-holder`]}`}>
           {watchLaterState.watchLater.map((watchLaterVideo) => {
+            debugger;
             const videoDetails = videosState.videos.find(
               (video) => video._id === id
             );
+            console.log("varundev: spv 2");
+            console.log(videoDetails);
             return (
               <Card
                 key={watchLaterVideo._id}
@@ -193,7 +199,7 @@ export default function SingleVideoPage() {
             );
           })}
         </div>
-      </section>
+      </section> */}
     </section>
   );
 }

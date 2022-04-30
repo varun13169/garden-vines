@@ -1,15 +1,15 @@
 import React from "react";
-import styles from "./videoListingPage.module.css";
+import styles from "./likedVideosPage.module.css";
 
 import { Card, Navbar, Sidebar } from "../../components";
 import { useAuth, useLikes, useVideos, useWatchLater } from "../../contexts";
 import { useAxios } from "../../customHooks";
 import { useEffect } from "react";
-import { getItemCardData } from "./videoListingPageUtils";
+import { getItemCardData } from "./likedVideosPageUtils";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
-export default function VideoListingPage() {
+export default function LikedVideosPage() {
   const { likesState, setLikesState } = useLikes();
   const { videosState, setVideosState } = useVideos();
   const { watchLaterState, setWatchLaterState } = useWatchLater();
@@ -75,6 +75,16 @@ export default function VideoListingPage() {
     });
   }, [categoryResponse, categoryLoading, categoryError]);
 
+  const likedVideoIds = likesState.likes.reduce((acc, cur) => {
+    return [...acc, cur._id];
+  }, []);
+  console.log(likedVideoIds);
+
+  const likedVideos = videosState.videos.filter((v) => {
+    return likedVideoIds.find((e) => e === v._id) !== undefined;
+  });
+  console.log(likedVideos);
+
   return (
     <section className={`${styles[`page-wrap`]}`}>
       <section className={`${styles[`page-nav`]}`}>
@@ -84,34 +94,11 @@ export default function VideoListingPage() {
         <Sidebar></Sidebar>
       </section>
       <section className={`${styles["page-main"]}`}>
-        <div className={`${styles["category-list-holder"]}`}>
-          {videosState.categories.map((category) => {
-            const btnStyle = category.isSelected
-              ? "dui-btn--primary"
-              : "dui-btn--secondary";
-            return (
-              <button
-                key={category._id}
-                className={`${
-                  styles[`category-btn`]
-                } dui-btn ${btnStyle} dui-util-txt-sm dui-util-spc-pad-0_8rem-xs  dui-util-bdr-radi-999px-mx reset-button-inherit-parent`}
-                onClick={() => {
-                  setVideosState({
-                    type: "FILTER_BY_CATEGORY",
-                    data: { categoryId: category._id },
-                  });
-                }}
-              >
-                {category.categoryName}
-              </button>
-            );
-          })}
-        </div>
         <p className={`dui-util-txt-reg`}>
-          Video ({videosState.videosToShow.length})
+          Liked Videos ({likedVideos.length})
         </p>
         <div className={`${styles["video-list-holder"]}`}>
-          {videosState.videosToShow.map((videoDetails) => {
+          {likedVideos.map((videoDetails) => {
             return (
               <Card
                 key={videoDetails._id}

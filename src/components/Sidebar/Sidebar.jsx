@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import {
   CompassSVG,
   PlaylistSVG,
+  WatchLaterSVG,
   WishlistHeartSVG,
 } from "../../assets/svgReactComponents";
 import LikeSVG from "../../assets/svgReactComponents/LikeSVG";
@@ -21,7 +22,7 @@ function Sidebar() {
           </Link>
         </li>
         <li>
-          <Link className={`${styles["sidebar-link"]} dui-link`} to="/">
+          <Link className={`${styles["sidebar-link"]} dui-link`} to="/liked">
             <LikeSVG className={`${styles["sidebar-link-icons"]}`}></LikeSVG>
             <p className="dui-util-txt-reg">Liked</p>
           </Link>
@@ -35,6 +36,18 @@ function Sidebar() {
               className={`${styles["sidebar-link-icons"]}`}
             ></PlaylistSVG>
             <p className="dui-util-txt-reg">PlayList</p>
+          </Link>
+        </li>
+
+        <li>
+          <Link
+            className={`${styles["sidebar-link"]} dui-link`}
+            to="/watch-later"
+          >
+            <WatchLaterSVG
+              className={`${styles["sidebar-link-icons"]}`}
+            ></WatchLaterSVG>
+            <p className="dui-util-txt-reg">Watch Later</p>
           </Link>
         </li>
       </ul>

@@ -1,6 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import {
   Homepage,
+  LikedVideosPage,
   PlaylistPage,
   SignInPage,
   SignOutPage,
@@ -20,8 +21,17 @@ export default function App() {
     <div className="App">
       <Routes>
         <Route path="/" element={<VideoListingPage />}></Route>
-        <Route path="/watch-later" element={<WatchLaterPage />}></Route>
+        {/* <Route path="/" element={< />}></Route> */}
         <Route path="/videos" element={<VideoListingPage />}></Route>
+
+        <Route
+          path="/watch-later"
+          element={
+            <RequiresAuth>
+              <WatchLaterPage />
+            </RequiresAuth>
+          }
+        ></Route>
 
         <Route
           path="/playlists"
@@ -31,6 +41,16 @@ export default function App() {
             </RequiresAuth>
           }
         ></Route>
+
+        <Route
+          path="/liked"
+          element={
+            <RequiresAuth>
+              <LikedVideosPage />
+            </RequiresAuth>
+          }
+        ></Route>
+
         <Route path="/video/:id" element={<SingleVideoPage />}></Route>
 
         <Route path="/signin" element={<SignInPage />}></Route>
