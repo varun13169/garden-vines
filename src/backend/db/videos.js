@@ -13,6 +13,7 @@ export const videos = [
     description:
       "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.",
     creator: "Soham Shah",
+    categoryId: "category2",
   },
   {
     _id: "F_Riqjdh2oM",
@@ -23,6 +24,7 @@ export const videos = [
     creator: "Sentdex",
     description:
       "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.",
+    categoryId: "category3",
   },
   {
     _id: "F_Riqjdh2oN",
@@ -33,6 +35,7 @@ export const videos = [
     creator: "Sentdex",
     description:
       "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.",
+    categoryId: "category2",
   },
   {
     _id: "F_Riqjdh2oO",
@@ -43,6 +46,7 @@ export const videos = [
     creator: "Sentdex",
     description:
       "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.",
+    categoryId: "category4",
   },
   {
     _id: "F_Riqjdh2oP",
@@ -53,6 +57,7 @@ export const videos = [
     creator: "Sentdex",
     description:
       "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.",
+    categoryId: "category1",
   },
   {
     _id: "F_Riqjdh2oQ",
@@ -63,5 +68,6 @@ export const videos = [
     creator: "Sentdex",
     description:
       "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.",
+    categoryId: "category2",
   },
 ];

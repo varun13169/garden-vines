@@ -55,15 +55,57 @@ export default function VideoListingPage() {
     });
   }, [response, loading, error]);
 
+  const {
+    response: categoryResponse,
+    loading: categoryLoading,
+    error: categoryError,
+  } = useAxios({
+    method: "GET",
+    url: "/api/categories",
+    headers: {
+      Accept: "*/*",
+    },
+  });
+
+  useEffect(() => {
+    setVideosState({
+      type: "INIT_CATEGORIES",
+      data: categoryResponse,
+    });
+  }, [categoryResponse, categoryLoading, categoryError]);
+
   return (
     <section className={`${styles[`page-wrap`]}`}>
       <section className={`${styles[`page-nav`]}`}>
         <Navbar></Navbar>
       </section>
       <section className={`${styles["page-main"]}`}>
+        <div className={`${styles["category-list-holder"]}`}>
+          {videosState.categories.map((category) => {
+            const btnStyle = category.isSelected
+              ? "dui-btn--primary"
+              : "dui-btn--secondary";
+            return (
+              <button
+                key={category._id}
+                className={`${
+                  styles[`category-btn`]
+                } dui-btn ${btnStyle} dui-util-txt-sm dui-util-spc-pad-0_8rem-xs  dui-util-bdr-radi-999px-mx reset-button-inherit-parent`}
+                onClick={() => {
+                  setVideosState({
+                    type: "FILTER_BY_CATEGORY",
+                    data: { categoryId: category._id },
+                  });
+                }}
+              >
+                {category.categoryName}
+              </button>
+            );
+          })}
+        </div>
         <p>All Videos in Library</p>
         <div className={`${styles["video-list-holder"]}`}>
-          {videosState.videos.map((videoDetails) => {
+          {videosState.videosToShow.map((videoDetails) => {
             return (
               <Card
                 key={videoDetails._id}
