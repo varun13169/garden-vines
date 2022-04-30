@@ -4,7 +4,7 @@ export default function LikeSVG(props) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      class="icon icon-tabler icon-tabler-thumb-up"
+      className="icon icon-tabler icon-tabler-thumb-up"
       width="56"
       height="56"
       viewBox="0 0 24 24"

@@ -14,7 +14,7 @@ export default function Card({ itemCardData }) {
   const cart = [];
   const { likesState, setLikesState } = useLikes();
 
-  const { _id, title, thumbnail, description } = videoDetails;
+  const { _id, title, thumbnail, src, description } = videoDetails;
 
   const isProductInCart =
     cart.filter((cartProduct) => {
@@ -31,7 +31,15 @@ export default function Card({ itemCardData }) {
   return (
     <div className="dui-card-prod-hzntl dui-util-bdr-radi-5px-s dui-util-gry-shdw dui-util-pos-rel">
       <div className="dui-card-prod-hzntl__img-container">
-        <img className="dui-card-prod-hzntl__img" src={thumbnail} alt="" />
+        {/* <img className="dui-card-prod-hzntl__img" src={thumbnail} alt="" /> */}
+        <iframe
+          className="dui-card-prod-hzntl__img"
+          src={src}
+          title="YouTube video player"
+          frameBorder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+        ></iframe>
       </div>
 
       <div className="dui-card-prod-hzntl__info">

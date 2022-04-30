@@ -5,6 +5,7 @@ import {
   SignInPage,
   SignOutPage,
   SignUpPage,
+  SingleVideoPage,
   VideoListingPage,
   WatchLaterPage,
 } from "./pages";
@@ -30,6 +31,7 @@ export default function App() {
             </RequiresAuth>
           }
         ></Route>
+        <Route path="/video/:id" element={<SingleVideoPage />}></Route>
 
         <Route path="/signin" element={<SignInPage />}></Route>
         <Route path="/signup" element={<SignUpPage />}></Route>

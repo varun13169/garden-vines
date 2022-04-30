@@ -2,7 +2,7 @@ import styles from "./playlistPage.module.css";
 
 import React from "react";
 import { Navbar } from "../../components";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { usePlaylist } from "../../contexts";
 import { BinSVG } from "../../assets/svgReactComponents";
 import { onSubmitPlaylistForm, purgePlaylist } from "./playlistPageUtils";
@@ -11,6 +11,18 @@ export default function PlaylistPage() {
   const [playlistInputNameState, setPlaylistInputNameState] = useState("");
   const [dispNewPlaylistForm, setDispNewPlaylistForm] = useState(false);
   const { playlistsState, setPlaylistsState } = usePlaylist();
+  const [focusedPlaylistState, setFocusedPlaylistState] = useState({
+    focusedPlaylist: null,
+  });
+
+  useEffect(() => {
+    let playlistCount = playlistsState.playlists.length;
+    if (playlistCount > 0) {
+      setFocusedPlaylistState({ focusedPlaylist: playlistsState.playlists[0] });
+    }
+  }, []);
+
+  //   console.log(focusedPlaylistState);
 
   return (
     <section className={`${styles[`page-wrap`]}`}>
@@ -60,21 +72,44 @@ export default function PlaylistPage() {
                   {playlist.title}
                 </p>
                 <button
-                  className={`reset-button-inherit-parent dui-util-bdr-radi-999px-mx`}
-                  style={{
-                    backgroundColor: "grey",
-                  }}
+                  className={`dui-btn dui-btn--primary reset-button-inherit-parent dui-util-bdr-radi-999px-mx`}
+                  //   style={{
+                  //     backgroundColor: "grey",
+                  //   }}
                   onClick={(e) => {
                     purgePlaylist(e, playlist._id, setPlaylistsState);
                   }}
                 >
                   <BinSVG
-                    style={{ stroke: "black", width: "2em", height: "2em" }}
+                    style={{
+                      stroke: "white",
+                      width: "2em",
+                      height: "2em",
+                      padding: "0.5rem",
+                    }}
                   />
                 </button>
               </div>
             );
           })}
+        </div>
+
+        <div className={`${styles["video-list-holder"]}`}>
+          {focusedPlaylistState.focusedPlaylist !== null &&
+            focusedPlaylistState.focusedPlaylist.videos.map((videoDetails) => {
+              return (
+                <Card
+                  key={videoDetails._id}
+                  itemCardData={getItemCardData({
+                    videoDetails,
+                    watchLaterState,
+                    setWatchLaterState,
+                    likesState,
+                    setLikesState,
+                  })}
+                ></Card>
+              );
+            })}
         </div>
       </section>
 
