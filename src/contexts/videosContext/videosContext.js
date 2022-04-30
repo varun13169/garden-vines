@@ -24,7 +24,7 @@ const VideosContextProvider = ({ children }) => {
         });
         return applyCategoryFilter({
           ...state,
-          categories: [...state.categories, ...action.data.categories],
+          categories: [...action.data.categories],
         });
       case "FILTER_BY_CATEGORY":
         const categoryId = action.data.categoryId;
@@ -47,7 +47,7 @@ const VideosContextProvider = ({ children }) => {
   const [videosState, setVideosState] = useReducer(reducer, {
     videos: [],
     videosToShow: [],
-    categories: [{ _id: "ALL", isSelected: true, categoryName: "All" }],
+    categories: [],
     filterByCategory: { _id: "ALL", isSelected: true, categoryName: "All" },
   });
 
@@ -63,14 +63,31 @@ const useVideos = () => useContext(VideosContext);
 export { useVideos, VideosContextProvider };
 
 const applyCategoryFilter = (state) => {
-  if (state.filterByCategory._id === "ALL") {
-    return { ...state, videosToShow: [...state.videos] };
+  let newState = { ...state };
+  if (newState.categories.filter((c) => c.isSelected === true).length === 0) {
+    newState = {
+      ...newState,
+      categories: newState.categories.map((c) => {
+        if (c._id === "ALL") {
+          return { ...c, isSelected: true };
+        }
+        return c;
+      }),
+    };
+  }
+
+  const selectedCategories = newState.categories.reduce((acc, cur) => {
+    return cur.isSelected ? [...acc, cur._id] : acc;
+  }, []);
+
+  if (selectedCategories.find((e) => e === "ALL") !== undefined) {
+    return { ...newState, videosToShow: [...newState.videos] };
   }
 
   return {
-    ...state,
-    videosToShow: state.videos.filter(
-      (v) => v.categoryId === state.filterByCategory._id
-    ),
+    ...newState,
+    videosToShow: newState.videos.filter((v) => {
+      return selectedCategories.find((e) => e === v.categoryId) !== undefined;
+    }),
   };
 };

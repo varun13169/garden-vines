@@ -26,7 +26,7 @@ export default function Navbar() {
         className="dui-nav-sch-act__logo dui-util-txt-decoration-none"
         to="/"
       >
-        <h3 className="dui-util-fw-bld dui-primary-color">Garden Kart</h3>
+        <h3 className="dui-util-fw-bld dui-primary-color">Garden Vines</h3>
       </Link>
 
       {/* <!-- Search --> */}

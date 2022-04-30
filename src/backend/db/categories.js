@@ -7,6 +7,12 @@ import { v4 as uuid } from "uuid";
 
 export const categories = [
   {
+    _id: "ALL",
+    categoryName: "All",
+    description:
+      "Computer programming is the process of designing and building an executable computer program to accomplish a specific computing",
+  },
+  {
     _id: "category1",
     categoryName: "Computer Programming",
     description:

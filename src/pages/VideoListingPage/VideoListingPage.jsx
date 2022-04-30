@@ -1,12 +1,13 @@
 import React from "react";
 import styles from "./videoListingPage.module.css";
 
-import { Card, Navbar } from "../../components";
+import { Card, Navbar, Sidebar } from "../../components";
 import { useAuth, useLikes, useVideos, useWatchLater } from "../../contexts";
 import { useAxios } from "../../customHooks";
 import { useEffect } from "react";
 import { getItemCardData } from "./videoListingPageUtils";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 export default function VideoListingPage() {
   const { likesState, setLikesState } = useLikes();
@@ -79,6 +80,9 @@ export default function VideoListingPage() {
       <section className={`${styles[`page-nav`]}`}>
         <Navbar></Navbar>
       </section>
+      <section className={`${styles[`page-sidebar`]}`}>
+        <Sidebar></Sidebar>
+      </section>
       <section className={`${styles["page-main"]}`}>
         <div className={`${styles["category-list-holder"]}`}>
           {videosState.categories.map((category) => {
@@ -103,20 +107,27 @@ export default function VideoListingPage() {
             );
           })}
         </div>
-        <p>All Videos in Library</p>
+        <p className={`dui-util-txt-reg`}>
+          Video ({videosState.videosToShow.length})
+        </p>
         <div className={`${styles["video-list-holder"]}`}>
           {videosState.videosToShow.map((videoDetails) => {
             return (
-              <Card
-                key={videoDetails._id}
-                itemCardData={getItemCardData({
-                  videoDetails,
-                  watchLaterState,
-                  setWatchLaterState,
-                  likesState,
-                  setLikesState,
-                })}
-              ></Card>
+              <Link
+                className={`${styles["video-link"]} dui-link`}
+                to={`/video/${videoDetails._id}`}
+              >
+                <Card
+                  key={videoDetails._id}
+                  itemCardData={getItemCardData({
+                    videoDetails,
+                    watchLaterState,
+                    setWatchLaterState,
+                    likesState,
+                    setLikesState,
+                  })}
+                ></Card>
+              </Link>
             );
           })}
         </div>

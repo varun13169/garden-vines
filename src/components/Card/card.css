@@ -74,4 +74,5 @@
   /* height: 24.4rem; */
   align-items: center;
   margin: auto;
+  pointer-events: none;
 }

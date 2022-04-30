@@ -19,7 +19,7 @@ export default function App() {
   return (
     <div className="App">
       <Routes>
-        <Route path="/" element={<Homepage />}></Route>
+        <Route path="/" element={<VideoListingPage />}></Route>
         <Route path="/watch-later" element={<WatchLaterPage />}></Route>
         <Route path="/videos" element={<VideoListingPage />}></Route>
 
