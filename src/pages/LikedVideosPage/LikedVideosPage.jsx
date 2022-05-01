@@ -2,17 +2,31 @@ import React from "react";
 import styles from "./likedVideosPage.module.css";
 
 import { Card, Navbar, Sidebar } from "../../components";
-import { useAuth, useLikes, useVideos, useWatchLater } from "../../contexts";
+import {
+  useAuth,
+  useLikes,
+  usePlaylist,
+  useVideos,
+  useWatchLater,
+} from "../../contexts";
 import { useAxios } from "../../customHooks";
 import { useEffect } from "react";
-import { getItemCardData } from "./likedVideosPageUtils";
+import {
+  getItemCardData,
+  onSubmitAddToPlaylistForm,
+} from "./likedVideosPageUtils";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 export default function LikedVideosPage() {
+  const [dispAddToPlaylistFormState, setDispAddToPlaylistFormState] =
+    useState(null);
+  const [selectedPlaylistId, setSelectedPlaylistId] = useState(null);
   const { likesState, setLikesState } = useLikes();
   const { videosState, setVideosState } = useVideos();
   const { watchLaterState, setWatchLaterState } = useWatchLater();
+  const { playlistsState, setPlaylistsState } = usePlaylist();
   const { authState, checkValidTokenAndSetAuth } = useAuth();
 
   if (authState.isSignnedIn) {
@@ -104,8 +118,8 @@ export default function LikedVideosPage() {
                 key={videoDetails._id}
                 itemCardData={getItemCardData({
                   videoDetails,
-                  watchLaterState,
-                  setWatchLaterState,
+                  dispAddToPlaylistFormState,
+                  setDispAddToPlaylistFormState,
                   likesState,
                   setLikesState,
                 })}
@@ -114,6 +128,68 @@ export default function LikedVideosPage() {
           })}
         </div>
       </section>
+
+      {dispAddToPlaylistFormState !== null && (
+        <div className="dui-modal" style={{ backgroundColor: "#c2c2c2db" }}>
+          <form
+            className="dui-modal__info-card dui-util-spc-pad-s"
+            onSubmit={(e) =>
+              onSubmitAddToPlaylistForm(
+                e,
+                dispAddToPlaylistFormState,
+                setDispAddToPlaylistFormState,
+                playlistsState,
+                setPlaylistsState,
+                selectedPlaylistId
+              )
+            }
+            style={{
+              width: "fit-content",
+              height: "fit-content",
+              backgroundColor: "var(--site-bg-color)",
+            }}
+          >
+            <p
+              className="dui-modal__close"
+              onClick={() => {
+                setDispAddToPlaylistFormState(null);
+              }}
+            >
+              X
+            </p>
+
+            {playlistsState.playlists.map((pl) => {
+              console.log(pl);
+
+              return (
+                <label
+                  htmlFor={pl._id}
+                  key={pl._id}
+                  className="dui-inp-radio-btn dui-util-txt-sm"
+                >
+                  {pl.title}
+                  <input
+                    id={pl._id}
+                    type="radio"
+                    name="playlist-selection"
+                    onClick={() => {
+                      setSelectedPlaylistId(pl._id);
+                    }}
+                  />
+                  <span class="dui-inp-radio-btn__checkmark"></span>
+                </label>
+              );
+            })}
+
+            <button
+              type="submit"
+              className={`dui-link dui-link--primary dui-util-txt-sm dui-util-spc-pad-0_8rem-xs dui-util-fw-bld reset-button-inherit-parent`}
+            >
+              Add to Playlist
+            </button>
+          </form>
+        </div>
+      )}
     </section>
   );
 }

@@ -132,7 +132,7 @@ export default function PlaylistPage() {
             style={{
               width: "fit-content",
               height: "fit-content",
-              backgroundColor: "white",
+              backgroundColor: "var(--site-bg-color)",
             }}
           >
             <p

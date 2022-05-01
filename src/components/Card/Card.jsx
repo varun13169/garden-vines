@@ -1,7 +1,7 @@
 import "./card.css";
 import { BinSVG, WishlistHeartSVG } from "../../assets/svgReactComponents";
-import { Link, useLocation } from "react-router-dom";
-import { useLikes, useWatchLater } from "../../contexts";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useAuth, useLikes, useWatchLater } from "../../contexts";
 import LikeSVG from "../../assets/svgReactComponents/LikeSVG";
 
 export default function Card({ itemCardData }) {
@@ -14,20 +14,13 @@ export default function Card({ itemCardData }) {
 
   const cart = [];
   const { likesState, setLikesState } = useLikes();
+  const { authState, checkValidTokenAndSetAuth } = useAuth();
+  const { isSignnedIn } = authState;
+  const navigate = useNavigate();
 
   const { _id, title, thumbnail, src, description } = videoDetails;
   console.log("Card");
   console.log(videoDetails);
-
-  const isProductInCart =
-    cart.filter((cartProduct) => {
-      return videoDetails._id === cartProduct._id;
-    }).length !== 0;
-
-  const isInLikedVideos =
-    likesState.likes.filter((likedVideo) => {
-      return videoDetails._id === likedVideo._id;
-    }).length !== 0;
 
   const { pathname } = useLocation();
 
@@ -82,18 +75,27 @@ export default function Card({ itemCardData }) {
       <div className="dui-card-prod-hzntl__actions">
         <div className="dui-card-prod-hzntl__buttons">
           {(pathname === "/" ||
+            pathname === "/liked" ||
             pathname === "/history" ||
             pathname === "/watch-later") && (
             <button
               className="primary-action-btn dui-btn dui-btn--primary dui-util-txt-sm dui-util-spc-pad-0_8rem-xs reset-button-inherit-parent"
-              onClick={() => priAction.action(videoDetails)}
+              onClick={() => {
+                isSignnedIn
+                  ? priAction.action(videoDetails)
+                  : navigate("/signin");
+              }}
             >
               {priAction.name}
             </button>
           )}
           <button
             className="secondary-action-btn dui-btn dui-util-bdr-radi-999px-mx reset-button-inherit-parent"
-            onClick={() => likeAction.action(videoDetails)}
+            onClick={() => {
+              isSignnedIn
+                ? likeAction.action(videoDetails)
+                : navigate("/signin");
+            }}
           >
             {likeAction.isInLikedVideos && (
               <LikeSVG

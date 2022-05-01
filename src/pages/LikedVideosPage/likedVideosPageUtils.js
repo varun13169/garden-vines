@@ -1,5 +1,66 @@
 import axios from "axios";
-import { useAxios } from "../../customHooks";
+
+const onSubmitAddToPlaylistForm = (
+  e,
+  dispAddToPlaylistFormState,
+  setDispAddToPlaylistFormState,
+  playlistsState,
+  setPlaylistsState,
+  playlistId
+) => {
+  e.preventDefault();
+
+  if (playlistId === null) {
+    return;
+  }
+
+  playlistsState.playlists;
+  setPlaylistsState({
+    type: "UPDATE_PLAYLIST",
+    data: {
+      ...playlistsState,
+      playlists: playlistsState.playlists.map((pl) => {
+        if (pl._id === playlistId) {
+          console.log(pl);
+          if (
+            pl.videos.filter((v) => dispAddToPlaylistFormState._id === v._id)
+              .length === 0
+          ) {
+            return {
+              ...pl,
+              videos: [...pl.videos, dispAddToPlaylistFormState],
+            };
+          }
+        }
+        return pl;
+      }),
+    },
+  });
+
+  let config = {
+    headers: {
+      Accept: "*/*",
+      authorization: localStorage.getItem("token"),
+    },
+  };
+
+  let payload = { video: dispAddToPlaylistFormState };
+  (async () => {
+    try {
+      let res = await axios.post(
+        "/api/user/playlists/" + playlistId,
+        payload,
+        config
+      );
+      //Todo: syc with api call
+    } catch (err) {
+      console.log(err);
+    }
+  })();
+
+  setDispAddToPlaylistFormState(null);
+  setPlaylistsState(null);
+};
 
 /**
  * Remove From Wishlist And Set Wishlist
@@ -191,16 +252,11 @@ const removeFromLikedVideos = ({ likesState, setLikesState }) => {
 
 const getItemCardData = ({
   videoDetails,
-  watchLaterState,
-  setWatchLaterState,
+  dispAddToPlaylistFormState,
+  setDispAddToPlaylistFormState,
   likesState,
   setLikesState,
 }) => {
-  const isVideoInWatchLater =
-    watchLaterState.watchLater.filter((video) => {
-      return videoDetails._id === video._id;
-    }).length !== 0;
-
   const isInLikedVideos =
     likesState.likes.filter((likedVideo) => {
       return videoDetails._id === likedVideo._id;
@@ -209,15 +265,10 @@ const getItemCardData = ({
   const res = {};
   res.videoDetails = { ...videoDetails };
 
-  res.priAction = isVideoInWatchLater
-    ? {
-        name: "Remove from Watch Later",
-        action: removeFromWatchLater({ watchLaterState, setWatchLaterState }),
-      }
-    : {
-        name: "Add to Watch Later",
-        action: addToWatchLater({ watchLaterState, setWatchLaterState }),
-      };
+  res.priAction = {
+    name: "Add to Playlist",
+    action: setDispAddToPlaylistFormState,
+  };
 
   res.likeAction = isInLikedVideos
     ? {
@@ -231,4 +282,4 @@ const getItemCardData = ({
   return res;
 };
 
-export { getItemCardData };
+export { getItemCardData, onSubmitAddToPlaylistForm };

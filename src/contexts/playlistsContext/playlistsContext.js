@@ -27,6 +27,10 @@ const PlaylistContextProvider = ({ children }) => {
             return playlist._id !== playlistId;
           }),
         };
+
+      case "UPDATE_PLAYLIST":
+        return action.data;
+
       default:
         console.log("Default");
     }
