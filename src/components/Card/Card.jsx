@@ -2,6 +2,7 @@ import "./card.css";
 import { BinSVG, WishlistHeartSVG } from "../../assets/svgReactComponents";
 import { Link, useLocation } from "react-router-dom";
 import { useLikes, useWatchLater } from "../../contexts";
+import LikeSVG from "../../assets/svgReactComponents/LikeSVG";
 
 export default function Card({ itemCardData }) {
   itemCardData = {
@@ -80,52 +81,39 @@ export default function Card({ itemCardData }) {
 
       <div className="dui-card-prod-hzntl__actions">
         <div className="dui-card-prod-hzntl__buttons">
-          {(pathname === "/" || pathname === "/history") && (
+          {(pathname === "/" ||
+            pathname === "/history" ||
+            pathname === "/watch-later") && (
             <button
-              className="product-card-btn dui-btn dui-btn--primary dui-util-txt-sm dui-util-spc-pad-0_8rem-xs reset-button-inherit-parent"
+              className="primary-action-btn dui-btn dui-btn--primary dui-util-txt-sm dui-util-spc-pad-0_8rem-xs reset-button-inherit-parent"
               onClick={() => priAction.action(videoDetails)}
             >
               {priAction.name}
             </button>
           )}
-          {pathname === "/products" && isProductInCart && (
-            <Link
-              to={priAction.toPath}
-              className="product-card-link dui-link dui-link--primary dui-util-txt-sm dui-util-spc-pad-xs dui-util-txt-align-cent"
-            >
-              {priAction.name}
-            </Link>
-          )}
-          {(pathname === "/cart" ||
-            (pathname === "/wishlist" && isProductInCart)) && (
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-              }}
-            >
-              <button
-                className="product-card-btn dui-btn dui-btn--primary dui-util-txt-md dui-util-spc-pad reset-button-inherit-parent"
-                style={{ flexGrow: "1" }}
-                onClick={() => priAction.cartActions.decrement(itemDetails)}
-                disabled={
-                  (qty ?? cart.filter((cp) => cp._id === _id)[0].qty) === 1
-                }
-              >
-                -
-              </button>
-              <p className="dui-util-txt-align-cent" style={{ flexGrow: "1" }}>
-                {qty ?? cart.filter((cp) => cp._id === _id)[0].qty}
-              </p>
-              <button
-                className="product-card-btn dui-btn dui-btn--primary dui-util-txt-md dui-util-spc-pad-0_8re-xs reset-button-inherit-parent"
-                style={{ flexGrow: "1" }}
-                onClick={() => priAction.cartActions.increment(itemDetails)}
-              >
-                +
-              </button>
-            </div>
-          )}
+          <button
+            className="secondary-action-btn dui-btn dui-util-bdr-radi-999px-mx reset-button-inherit-parent"
+            onClick={() => likeAction.action(videoDetails)}
+          >
+            {likeAction.isInLikedVideos && (
+              <LikeSVG
+                height="3rem"
+                width="3rem"
+                strokeWidth="1.5"
+                fill="#F34E4E"
+                stroke="#F34E4E"
+              ></LikeSVG>
+            )}
+            {!likeAction.isInLikedVideos && (
+              <LikeSVG
+                height="3rem"
+                width="3rem"
+                strokeWidth="1.5"
+                fill="none"
+                stroke="#F34E4E"
+              ></LikeSVG>
+            )}
+          </button>
           {/* <button
             className="product-card-btn dui-btn dui-btn--secondary dui-util-txt-sm dui-util-spc-pad-0_8rem-xs reset-button-inherit-parent"
             onClick={() => secAction.action(itemDetails)}
@@ -136,7 +124,8 @@ export default function Card({ itemCardData }) {
       </div>
 
       {/* <!-- Button Component Starts -- Icon --> */}
-      <button
+
+      {/* <button
         className="dui-card-prod-hzntl__wishlist-btn dui-btn dui-util-bdr-radi-999px-mx reset-button-inherit-parent"
         onClick={() => likeAction.action(videoDetails)}
       >
@@ -162,8 +151,8 @@ export default function Card({ itemCardData }) {
             strokeLinecap="round"
             strokeLinejoin="round"
           ></WishlistHeartSVG>
-        )}
-      </button>
+        )} 
+      </button>*/}
       {/* <!-- Button Component Ends -- Icon --> */}
     </div>
   );

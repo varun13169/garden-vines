@@ -76,3 +76,14 @@
   margin: auto;
   pointer-events: none;
 }
+
+.dui-card-prod-hzntl__buttons {
+  flex-direction: row;
+}
+
+.dui-card-prod-hzntl__buttons > .primary-action-btn {
+  width: 85%;
+}
+.dui-card-prod-hzntl__buttons > .secondary-action-btn {
+  margin-left: auto;
+}
