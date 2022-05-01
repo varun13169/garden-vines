@@ -2,3 +2,9 @@
   font-family: sans-serif;
   text-align: center;
 }
+
+.dark-theme {
+  --dui-light-theme-bg: #000000;
+  --dui-light-theme-contrast-txt: #ffffff;
+  --site-bg-color: #374151;
+}

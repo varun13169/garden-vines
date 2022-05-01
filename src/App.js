@@ -15,11 +15,14 @@ import {
 import MockAPI from "./mockman/MockAPI";
 import "./styles.css";
 import { RequiresAuth } from "./components";
-import { useAuth } from "./contexts";
+import { initTheme } from "./utils";
+import { useTheme } from "./contexts";
 
 export default function App() {
+  const { theme, setTheme } = useTheme();
+
   return (
-    <div className="App">
+    <div className={"App   " + initTheme(theme)}>
       <Routes>
         <Route path="/" element={<VideoListingPage />}></Route>
         <Route path="/videos" element={<VideoListingPage />}></Route>

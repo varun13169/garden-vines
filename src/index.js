@@ -9,6 +9,7 @@ import {
   HistorContextProvider,
   LikesContextProvider,
   PlaylistContextProvider,
+  ThemeContextProvider,
   VideosContextProvider,
   WatchLaterContextProvider,
 } from "./contexts";
@@ -38,19 +39,21 @@ const rootElement = document.getElementById("root");
 ReactDOM.render(
   <StrictMode>
     <BrowserRouter>
-      <AuthContextProvider>
-        <PlaylistContextProvider>
-          <VideosContextProvider>
-            <LikesContextProvider>
-              <HistorContextProvider>
-                <WatchLaterContextProvider>
-                  <App />
-                </WatchLaterContextProvider>
-              </HistorContextProvider>
-            </LikesContextProvider>
-          </VideosContextProvider>
-        </PlaylistContextProvider>
-      </AuthContextProvider>
+      <ThemeContextProvider>
+        <AuthContextProvider>
+          <PlaylistContextProvider>
+            <VideosContextProvider>
+              <LikesContextProvider>
+                <HistorContextProvider>
+                  <WatchLaterContextProvider>
+                    <App />
+                  </WatchLaterContextProvider>
+                </HistorContextProvider>
+              </LikesContextProvider>
+            </VideosContextProvider>
+          </PlaylistContextProvider>
+        </AuthContextProvider>
+      </ThemeContextProvider>
     </BrowserRouter>
   </StrictMode>,
   rootElement

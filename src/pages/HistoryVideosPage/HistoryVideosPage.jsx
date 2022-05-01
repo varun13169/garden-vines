@@ -116,7 +116,9 @@ export default function HistoryVideosPage() {
         <Sidebar></Sidebar>
       </section>
       <section className={`${styles["page-main"]}`}>
-        <p className={`dui-util-txt-reg`}>History ({historyVideos.length})</p>
+        <p className={`dui-util-txt-reg dui-primary-color-p2`}>
+          History ({historyVideos.length})
+        </p>
         <button
           className={`${styles["btn-clear-history"]} dui-btn dui-btn--primary dui-util-bdr-radi-5px-s dui-util-txt-sm dui-util-spc-pad-0_8rem-xs reset-button-inherit-parent`}
           onClick={() => {

@@ -94,7 +94,7 @@ export default function LikedVideosPage() {
         <Sidebar></Sidebar>
       </section>
       <section className={`${styles["page-main"]}`}>
-        <p className={`dui-util-txt-reg`}>
+        <p className={`dui-util-txt-reg dui-primary-color-p2`}>
           Liked Videos ({likedVideos.length})
         </p>
         <div className={`${styles["video-list-holder"]}`}>

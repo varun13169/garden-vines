@@ -94,7 +94,7 @@ export default function WatchLaterPage() {
         <Sidebar></Sidebar>
       </section>
       <section className={`${styles["page-main"]}`}>
-        <p className={`dui-util-txt-reg`}>
+        <p className={`dui-util-txt-reg dui-primary-color-p2`}>
           Watch Later Videos ({watchLaterVideos.length})
         </p>
         <div className={`${styles["video-list-holder"]}`}>

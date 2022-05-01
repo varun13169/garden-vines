@@ -16,6 +16,7 @@ import {
   useHistory,
   HistorContextProvider,
 } from "./historyContext/historyContext";
+import { ThemeContextProvider, useTheme } from "./themeContext/themeContext";
 
 export {
   VideosContextProvider,
@@ -30,4 +31,6 @@ export {
   LikesContextProvider,
   useHistory,
   HistorContextProvider,
+  useTheme,
+  ThemeContextProvider,
 };

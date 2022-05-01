@@ -1,6 +1,8 @@
 import "./navbar.css";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router";
+import { useAuth } from "../../contexts";
+import LikeSVG from "../../assets/svgReactComponents/LikeSVG";
 // import { useAuth, useWishlist, useTheme } from "../../contexts";
 // import {
 //   MoonSVG,
@@ -12,13 +14,12 @@ import { useNavigate } from "react-router";
 export default function Navbar() {
   // const { auth, checkValidTokenAndSetAuth } = useAuth();
   // const { isSignnedIn, token } = auth;
-  const isSignnedIn = false;
+
+  const { authState, checkValidTokenAndSetAuth } = useAuth();
+  const { isSignnedIn } = authState;
   const navigate = useNavigate();
 
-  // const { wishlist, setWishlist } = useWishlist();
   const wishlist = [];
-  // const { theme, setTheme } = useTheme();
-  // console.log(theme);
 
   return (
     <nav className="dui-nav-sch-act">
@@ -54,7 +55,7 @@ export default function Navbar() {
                   onClick={() => {
                     localStorage.removeItem("token");
                     checkValidTokenAndSetAuth();
-                    navigate("/sign-out");
+                    navigate("/signout");
                   }}
                 >
                   Sign Out
@@ -66,7 +67,7 @@ export default function Navbar() {
                 {/* <!-- SignUp Button --> */}
                 <Link
                   className="dui-nav-sch-act__signup-btn dui-link dui-link--primary dui-util-txt-sm dui-util-spc-pad-0_8rem-xs dui-util-fw-bld"
-                  to="/playlists"
+                  to="/playlist"
                 >
                   Sign Up
                 </Link>
@@ -85,41 +86,14 @@ export default function Navbar() {
 
         {isSignnedIn && (
           <li>
-            <Link
-              className="dui-nav-sch-act__wish-lst-btn dui-util-disp-inline-block"
-              to="/wishlist"
+            <button
+              className="dui-nav-sch-act__signup-btn dui-link dui-link--primary dui-util-txt-sm dui-util-spc-pad-0_8rem-xs dui-util-fw-bld reset-input-inherit-parent"
+              onClick={() => {
+                navigate("/playlists");
+              }}
             >
-              <div className="dui-badge dui-badge--round-ele-0_5-top-0_5-right">
-                <div>{wishlist.length}</div>
-              </div>
-
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="icon icon-tabler icon-tabler-heart"
-                width="56"
-                height="56"
-                viewBox="0 0 24 24"
-                strokeWidth="1.5"
-                stroke="#9A9A9A"
-                fill="none"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                <path d="M19.5 13.572l-7.5 7.428l-7.5 -7.428m0 0a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572" />
-              </svg>
-            </Link>
-          </li>
-        )}
-
-        {isSignnedIn && (
-          <li>
-            <Link className="dui-nav-sch-act__cart_lst-btn dui-link" to="/cart">
-              <div className="dui-util-clr-prim-p2">
-                <ShoppingCartSVG />
-                <p className="dui-util-fw-bld dui-primary-color-p2">Cart</p>
-              </div>
-            </Link>
+              My Playlists
+            </button>
           </li>
         )}
 

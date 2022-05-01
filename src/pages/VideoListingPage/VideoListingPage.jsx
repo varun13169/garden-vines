@@ -107,7 +107,7 @@ export default function VideoListingPage() {
             );
           })}
         </div>
-        <p className={`dui-util-txt-reg`}>
+        <p className={`dui-util-txt-reg dui-primary-color-p2`}>
           Video ({videosState.videosToShow.length})
         </p>
         <div className={`${styles["video-list-holder"]}`}>
