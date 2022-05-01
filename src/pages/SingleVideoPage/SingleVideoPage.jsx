@@ -5,7 +5,13 @@ import { Card, Navbar, Sidebar } from "../../components";
 import { useParams } from "react-router-dom";
 
 import styles from "./singleVideoPage.module.css";
-import { useAuth, useLikes, useVideos, useWatchLater } from "../../contexts";
+import {
+  useAuth,
+  useHistory,
+  useLikes,
+  useVideos,
+  useWatchLater,
+} from "../../contexts";
 import { useAxios } from "../../customHooks";
 import { useEffect } from "react";
 import {
@@ -13,11 +19,13 @@ import {
   removeFromWatchLater,
   addToLikedVideos,
   removeFromLikedVideos,
+  addToHistoryVideos,
   getItemCardData,
 } from "./singleVideoPageUtils";
 
 export default function SingleVideoPage() {
   const { id } = useParams();
+  const { historyState, setHistoryState } = useHistory();
   const { videosState, setVideosState } = useVideos();
   const { likesState, setLikesState } = useLikes();
   const { watchLaterState, setWatchLaterState } = useWatchLater();
@@ -83,6 +91,22 @@ export default function SingleVideoPage() {
         });
       }
     }, [watchLaterResponse, watchLaterLoading, watchLaterError]);
+
+    const {
+      response: historyResponse,
+      loading: historyLoading,
+      error: historyError,
+    } = useAxios({
+      method: "POST",
+      url: "/api/user/history",
+      headers: config.headers,
+      data: {
+        video: videosState.videos.find((video) => video._id === id),
+      },
+    });
+    useEffect(() => {
+      // log successful
+    }, [historyResponse, historyLoading, historyError]);
   }
 
   const isInLikedVideos =

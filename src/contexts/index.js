@@ -12,6 +12,10 @@ import {
   PlaylistContextProvider,
 } from "./playlistsContext/playlistsContext";
 import { useLikes, LikesContextProvider } from "./likesContext/likesContext";
+import {
+  useHistory,
+  HistorContextProvider,
+} from "./historyContext/historyContext";
 
 export {
   VideosContextProvider,
@@ -24,4 +28,6 @@ export {
   usePlaylist,
   useLikes,
   LikesContextProvider,
+  useHistory,
+  HistorContextProvider,
 };

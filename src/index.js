@@ -6,6 +6,7 @@ import { makeServer } from "./server";
 import App from "./App";
 import {
   AuthContextProvider,
+  HistorContextProvider,
   LikesContextProvider,
   PlaylistContextProvider,
   VideosContextProvider,
@@ -41,9 +42,11 @@ ReactDOM.render(
         <PlaylistContextProvider>
           <VideosContextProvider>
             <LikesContextProvider>
-              <WatchLaterContextProvider>
-                <App />
-              </WatchLaterContextProvider>
+              <HistorContextProvider>
+                <WatchLaterContextProvider>
+                  <App />
+                </WatchLaterContextProvider>
+              </HistorContextProvider>
             </LikesContextProvider>
           </VideosContextProvider>
         </PlaylistContextProvider>

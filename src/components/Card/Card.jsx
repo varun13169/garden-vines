@@ -80,7 +80,7 @@ export default function Card({ itemCardData }) {
 
       <div className="dui-card-prod-hzntl__actions">
         <div className="dui-card-prod-hzntl__buttons">
-          {pathname === "/" && (
+          {(pathname === "/" || pathname === "/history") && (
             <button
               className="product-card-btn dui-btn dui-btn--primary dui-util-txt-sm dui-util-spc-pad-0_8rem-xs reset-button-inherit-parent"
               onClick={() => priAction.action(videoDetails)}

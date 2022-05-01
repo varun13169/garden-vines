@@ -1,5 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import {
+  HistoryVideosPage,
   Homepage,
   LikedVideosPage,
   PlaylistPage,
@@ -21,8 +22,16 @@ export default function App() {
     <div className="App">
       <Routes>
         <Route path="/" element={<VideoListingPage />}></Route>
-        {/* <Route path="/" element={< />}></Route> */}
         <Route path="/videos" element={<VideoListingPage />}></Route>
+
+        <Route
+          path="/history"
+          element={
+            <RequiresAuth>
+              <HistoryVideosPage />
+            </RequiresAuth>
+          }
+        ></Route>
 
         <Route
           path="/watch-later"

@@ -50,6 +50,15 @@ function Sidebar() {
             <p className="dui-util-txt-reg">Watch Later</p>
           </Link>
         </li>
+
+        <li>
+          <Link className={`${styles["sidebar-link"]} dui-link`} to="/history">
+            <WatchLaterSVG
+              className={`${styles["sidebar-link-icons"]}`}
+            ></WatchLaterSVG>
+            <p className="dui-util-txt-reg">History</p>
+          </Link>
+        </li>
       </ul>
     </aside>
   );

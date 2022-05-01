@@ -7,6 +7,7 @@ import SignOutPage from "./authPage/SignOutPage";
 import PlaylistPage from "./playlistPage/PlaylistPage";
 import SingleVideoPage from "./SingleVideoPage/SingleVideoPage";
 import LikedVideosPage from "./LikedVideosPage/LikedVideosPage";
+import HistoryVideosPage from "./HistoryVideosPage/HistoryVideosPage";
 
 export {
   Homepage,
@@ -18,4 +19,5 @@ export {
   SignOutPage,
   SingleVideoPage,
   LikedVideosPage,
+  HistoryVideosPage,
 };

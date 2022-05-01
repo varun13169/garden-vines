@@ -182,6 +182,42 @@ const addToWatchLater = ({ watchLaterState, setWatchLaterState }) => {
   };
 };
 
+const addToHistoryVideosAndSetHistoryState = ({
+  itemDetails,
+  historyState,
+  setHistoryState,
+}) => {
+  setLikesState({
+    type: "UPDATE_HISTORY",
+    data: {
+      history: [...historyState.history, itemDetails],
+    },
+  });
+
+  let config = {
+    headers: {
+      Accept: "*/*",
+      authorization: localStorage.getItem("token"),
+    },
+  };
+  let payload = { video: itemDetails };
+  (async () => {
+    let res = await axios.post("/api/user/history", payload, config);
+    // TODO: base on update API
+    // setWishlist((wishlist) => res.data.wishlist);
+  })();
+};
+
+const addToHistoryVideos = ({ historyState, setHistoryState }) => {
+  return (itemDetails) => {
+    addToHistoryVideosAndSetHistoryState({
+      itemDetails,
+      historyState,
+      setHistoryState,
+    });
+  };
+};
+
 const getItemCardData = ({
   videoDetails,
   watchLaterState,
@@ -236,5 +272,7 @@ export {
   removeFromWatchLater,
   addToLikedVideos,
   removeFromLikedVideos,
+  addToHistoryVideosAndSetHistoryState,
+  addToHistoryVideos,
   getItemCardData,
 };
