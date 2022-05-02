@@ -1,11 +1,15 @@
 import styles from "./playlistPage.module.css";
 
 import React from "react";
-import { Navbar, Sidebar } from "../../components";
+import { Card, Navbar, Sidebar } from "../../components";
 import { useState, useEffect } from "react";
-import { usePlaylist } from "../../contexts";
+import { useLikes, usePlaylist } from "../../contexts";
 import { BinSVG } from "../../assets/svgReactComponents";
-import { onSubmitPlaylistForm, purgePlaylist } from "./playlistPageUtils";
+import {
+  onSubmitPlaylistForm,
+  purgePlaylist,
+  getItemCardData,
+} from "./playlistPageUtils";
 
 export default function PlaylistPage() {
   const [playlistInputNameState, setPlaylistInputNameState] = useState("");
@@ -14,6 +18,7 @@ export default function PlaylistPage() {
   const [focusedPlaylistState, setFocusedPlaylistState] = useState({
     focusedPlaylist: null,
   });
+  const { likesState, setLikesState } = useLikes();
 
   useEffect(() => {
     let playlistCount = playlistsState.playlists.length;
@@ -22,7 +27,45 @@ export default function PlaylistPage() {
     }
   }, []);
 
-  //   console.log(focusedPlaylistState);
+  useEffect(() => {
+    console.log("ssddswedd");
+    // debugger;
+    let playlistCount = playlistsState.playlists.length;
+    if (playlistCount === 0) {
+      setFocusedPlaylistState((focusedPlaylist) => ({
+        focusedPlaylist: null,
+      }));
+    } else if (
+      playlistCount > 0 &&
+      focusedPlaylistState.focusedPlaylist === null
+    ) {
+      setFocusedPlaylistState(() => ({
+        focusedPlaylist: playlistsState.playlists[0],
+      }));
+    } else if (
+      playlistCount > 0 &&
+      focusedPlaylistState.focusedPlaylist !== null
+    ) {
+      const isPlaylistPresent =
+        playlistsState.playlists.filter(
+          (pl) => pl._id === focusedPlaylistState.focusedPlaylist._id
+        ).length !== 0;
+
+      if (isPlaylistPresent) {
+        setFocusedPlaylistState(() => ({
+          focusedPlaylist: playlistsState.playlists.find(
+            (pl) => pl._id === focusedPlaylistState.focusedPlaylist._id
+          ),
+        }));
+      } else {
+        setFocusedPlaylistState(() => ({
+          focusedPlaylist: playlistsState.playlists[0],
+        }));
+      }
+    }
+  }, [playlistsState]);
+
+  console.log(focusedPlaylistState);
 
   return (
     <section className={`${styles[`page-wrap`]}`}>
@@ -56,17 +99,21 @@ export default function PlaylistPage() {
         <div className={`${styles["playlist-holder"]}`}>
           {playlistsState.playlists.map((playlist) => {
             console.log(playlist);
+            console.log(focusedPlaylistState._id === playlist._id);
             return (
-              <div
+              <button
+                className={`${
+                  focusedPlaylistState.focusedPlaylist !== null &&
+                  focusedPlaylistState.focusedPlaylist._id === playlist._id
+                    ? styles["focused-playlist"]
+                    : ""
+                } ${styles["playlist-btn"]} reset-button-inherit-parent`}
                 key={playlist._id}
-                style={{
-                  display: "flex",
-                  border: "1px solid black",
-                  padding: "1.6rem",
-                  margin: "2rem 2rem 2rem 2rem",
-                  alignItems: "center",
-                  borderRadius: "5px",
-                }}
+                onClick={() =>
+                  setFocusedPlaylistState({
+                    focusedPlaylist: playlist,
+                  })
+                }
               >
                 <p
                   className="dui-util-fw-reg"
@@ -76,9 +123,6 @@ export default function PlaylistPage() {
                 </p>
                 <button
                   className={`dui-btn dui-btn--primary reset-button-inherit-parent dui-util-bdr-radi-999px-mx`}
-                  //   style={{
-                  //     backgroundColor: "grey",
-                  //   }}
                   onClick={(e) => {
                     purgePlaylist(e, playlist._id, setPlaylistsState);
                   }}
@@ -92,21 +136,25 @@ export default function PlaylistPage() {
                     }}
                   />
                 </button>
-              </div>
+              </button>
             );
           })}
         </div>
 
         <div className={`${styles["video-list-holder"]}`}>
+          {console.log(focusedPlaylistState?.focusedPlaylist)}
+          {console.log(focusedPlaylistState?.focusedPlaylist?.videos)}
           {focusedPlaylistState.focusedPlaylist !== null &&
             focusedPlaylistState.focusedPlaylist.videos.map((videoDetails) => {
+              const playlistDetails = focusedPlaylistState.focusedPlaylist;
               return (
                 <Card
                   key={videoDetails._id}
                   itemCardData={getItemCardData({
                     videoDetails,
-                    watchLaterState,
-                    setWatchLaterState,
+                    playlistDetails,
+                    playlistsState,
+                    setPlaylistsState,
                     likesState,
                     setLikesState,
                   })}
@@ -125,6 +173,7 @@ export default function PlaylistPage() {
                 e,
                 playlistInputNameState,
                 setPlaylistInputNameState,
+                playlistsState,
                 setPlaylistsState,
                 setDispNewPlaylistForm
               )

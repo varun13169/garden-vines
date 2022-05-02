@@ -58,8 +58,7 @@
   display: grid;
   gap: 3rem;
 
-  grid-template-columns: repeat(auto-fit, minmax(40rem, 1fr));
-  border: 1px black solid;
+  grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
 }
 
 .is-blurred {
@@ -68,4 +67,16 @@
   -o-filter: blur(7px);
   -ms-filter: blur(7px);
   filter: blur(7px);
+}
+
+.playlist-btn {
+  display: flex;
+  border: 1px solid black;
+  padding: 1.6rem;
+  margin: 2rem 2rem 2rem 2rem;
+  align-items: center;
+  border-radius: 5px;
+}
+.focused-playlist {
+  border: 1px solid red;
 }

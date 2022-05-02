@@ -38,7 +38,7 @@ export default function SiginInPage() {
                 try {
                   const res = await signinHandler(loginState);
                   checkValidTokenAndSetAuth();
-                  navigate("/"); // varundev: need to fix this
+                  navigate("/");
                   loginActionDispatch({ type: "RESET_LOGIN_FORM" });
                   setApiResponse((apiResponse) => ({
                     ...apiResponse,

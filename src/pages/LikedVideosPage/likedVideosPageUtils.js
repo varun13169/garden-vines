@@ -59,7 +59,6 @@ const onSubmitAddToPlaylistForm = (
   })();
 
   setDispAddToPlaylistFormState(null);
-  setPlaylistsState(null);
 };
 
 /**

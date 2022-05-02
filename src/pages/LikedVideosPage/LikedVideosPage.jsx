@@ -176,7 +176,7 @@ export default function LikedVideosPage() {
                       setSelectedPlaylistId(pl._id);
                     }}
                   />
-                  <span class="dui-inp-radio-btn__checkmark"></span>
+                  <span className="dui-inp-radio-btn__checkmark"></span>
                 </label>
               );
             })}

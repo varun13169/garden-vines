@@ -77,6 +77,7 @@ export default function Card({ itemCardData }) {
           {(pathname === "/" ||
             pathname === "/liked" ||
             pathname === "/history" ||
+            pathname === "/playlists" ||
             pathname === "/watch-later") && (
             <button
               className="primary-action-btn dui-btn dui-btn--primary dui-util-txt-sm dui-util-spc-pad-0_8rem-xs reset-button-inherit-parent"
