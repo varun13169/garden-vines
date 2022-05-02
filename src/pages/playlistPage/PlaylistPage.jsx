@@ -83,8 +83,11 @@ export default function PlaylistPage() {
             padding: "1rem 3rem 1rem 3rem",
           }}
         >
-          <p className="dui-util-txt-md dui-util-fw-sbld">My Playists</p>
-
+          <p
+            className={`dui-util-txt-md dui-util-fw-sbld dui-primary-color-p2`}
+          >
+            My Playists
+          </p>
           <button
             className={`dui-link dui-link--primary dui-util-txt-sm dui-util-spc-pad-0_8rem-xs dui-util-fw-bld reset-button-inherit-parent`}
             style={{ marginLeft: "auto" }}

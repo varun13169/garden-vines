@@ -1,21 +1,12 @@
 import "./navbar.css";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router";
-import { useAuth } from "../../contexts";
-import LikeSVG from "../../assets/svgReactComponents/LikeSVG";
-// import { useAuth, useWishlist, useTheme } from "../../contexts";
-// import {
-//   MoonSVG,
-//   SunSVG,
-//   SearchSVG,
-//   ShoppingCartSVG,
-// } from "../../assets/svgReactComponents";
+import { useAuth, useTheme } from "../../contexts";
+import { MoonSVG, SunSVG } from "../../assets/svgReactComponents";
 
 export default function Navbar() {
-  // const { auth, checkValidTokenAndSetAuth } = useAuth();
-  // const { isSignnedIn, token } = auth;
-
   const { authState, checkValidTokenAndSetAuth } = useAuth();
+  const { theme, setTheme } = useTheme();
   const { isSignnedIn } = authState;
   const navigate = useNavigate();
 
@@ -107,9 +98,9 @@ export default function Navbar() {
               });
             }}
           >
-            {/* {theme.currentTheme === "dark" && <SunSVG></SunSVG>}
+            {theme.currentTheme === "dark" && <SunSVG></SunSVG>}
 
-            {theme.currentTheme === "light" && <MoonSVG></MoonSVG>} */}
+            {theme.currentTheme === "light" && <MoonSVG></MoonSVG>}
           </button>
         </li>
       </ul>
