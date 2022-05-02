@@ -6,7 +6,6 @@ const LikesContextProvider = ({ children }) => {
   const reducer = (state, action) => {
     const actionType = action.type;
 
-    console.log(action);
     switch (actionType) {
       case "INIT_USER_LIKES":
         return { ...state, likes: action.data?.likes ? action.data.likes : [] };
@@ -14,6 +13,7 @@ const LikesContextProvider = ({ children }) => {
         return { ...state, likes: action.data.likes };
       default:
         console.log("DEFAULT");
+        return { ...state };
     }
   };
 

@@ -5,17 +5,14 @@ const HistorContext = createContext();
 const HistorContextProvider = ({ children }) => {
   const reducer = (state, action) => {
     const actionType = action.type;
-    console.log(action);
 
     switch (actionType) {
       case "INIT_HISTORY":
-        console.log(action.data);
         return {
           ...state,
           history: action.data?.history ? action.data.history : [],
         };
       case "ADD_VIDEO_TO_HISTORY":
-        console.log(action.data);
         return {
           ...state,
           history: [...state.history, { ...action.data.videoDetails }],

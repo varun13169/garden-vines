@@ -225,15 +225,8 @@ const getItemCardData = ({
   likesState,
   setLikesState,
 }) => {
-  console.log("Varunde: spv");
-  console.log(watchLaterState);
-
   const isVideoInWatchLater =
     watchLaterState.watchLater.filter((video) => {
-      console.log(video);
-      console.log(video._id);
-      console.log(videoDetails._id);
-      console.log(videoDetails._id === video._id);
       return videoDetails._id === video._id;
     }).length !== 0;
 

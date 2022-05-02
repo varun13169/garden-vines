@@ -1,8 +1,6 @@
 import React from "react";
 
 export function PlaylistSVG(props) {
-  console.log(props);
-  console.log("props");
   return (
     <svg
       className=""

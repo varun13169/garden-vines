@@ -78,12 +78,10 @@ export default function WatchLaterPage() {
   const watchLaterVideosIds = watchLaterState.watchLater.reduce((acc, cur) => {
     return [...acc, cur._id];
   }, []);
-  console.log(watchLaterVideosIds);
 
   const watchLaterVideos = videosState.videos.filter((v) => {
     return watchLaterVideosIds.find((e) => e === v._id) !== undefined;
   });
-  console.log(watchLaterVideos);
 
   return (
     <section className={`${styles[`page-wrap`]}`}>
