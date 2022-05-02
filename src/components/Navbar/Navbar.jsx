@@ -1,24 +1,16 @@
 import "./navbar.css";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router";
-// import { useAuth, useWishlist, useTheme } from "../../contexts";
-// import {
-//   MoonSVG,
-//   SunSVG,
-//   SearchSVG,
-//   ShoppingCartSVG,
-// } from "../../assets/svgReactComponents";
+import { useAuth, useTheme } from "../../contexts";
+import { MoonSVG, SunSVG } from "../../assets/svgReactComponents";
 
 export default function Navbar() {
-  // const { auth, checkValidTokenAndSetAuth } = useAuth();
-  // const { isSignnedIn, token } = auth;
-  const isSignnedIn = false;
+  const { authState, checkValidTokenAndSetAuth } = useAuth();
+  const { theme, setTheme } = useTheme();
+  const { isSignnedIn } = authState;
   const navigate = useNavigate();
 
-  // const { wishlist, setWishlist } = useWishlist();
   const wishlist = [];
-  // const { theme, setTheme } = useTheme();
-  // console.log(theme);
 
   return (
     <nav className="dui-nav-sch-act">
@@ -26,7 +18,7 @@ export default function Navbar() {
         className="dui-nav-sch-act__logo dui-util-txt-decoration-none"
         to="/"
       >
-        <h3 className="dui-util-fw-bld dui-primary-color">Garden Kart</h3>
+        <h3 className="dui-util-fw-bld dui-primary-color">Garden Vines</h3>
       </Link>
 
       {/* <!-- Search --> */}
@@ -54,7 +46,7 @@ export default function Navbar() {
                   onClick={() => {
                     localStorage.removeItem("token");
                     checkValidTokenAndSetAuth();
-                    navigate("/sign-out");
+                    navigate("/signout");
                   }}
                 >
                   Sign Out
@@ -66,7 +58,7 @@ export default function Navbar() {
                 {/* <!-- SignUp Button --> */}
                 <Link
                   className="dui-nav-sch-act__signup-btn dui-link dui-link--primary dui-util-txt-sm dui-util-spc-pad-0_8rem-xs dui-util-fw-bld"
-                  to="/playlists"
+                  to="/playlist"
                 >
                   Sign Up
                 </Link>
@@ -85,41 +77,14 @@ export default function Navbar() {
 
         {isSignnedIn && (
           <li>
-            <Link
-              className="dui-nav-sch-act__wish-lst-btn dui-util-disp-inline-block"
-              to="/wishlist"
+            <button
+              className="dui-nav-sch-act__signup-btn dui-link dui-link--primary dui-util-txt-sm dui-util-spc-pad-0_8rem-xs dui-util-fw-bld reset-input-inherit-parent"
+              onClick={() => {
+                navigate("/playlists");
+              }}
             >
-              <div className="dui-badge dui-badge--round-ele-0_5-top-0_5-right">
-                <div>{wishlist.length}</div>
-              </div>
-
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="icon icon-tabler icon-tabler-heart"
-                width="56"
-                height="56"
-                viewBox="0 0 24 24"
-                strokeWidth="1.5"
-                stroke="#9A9A9A"
-                fill="none"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                <path d="M19.5 13.572l-7.5 7.428l-7.5 -7.428m0 0a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572" />
-              </svg>
-            </Link>
-          </li>
-        )}
-
-        {isSignnedIn && (
-          <li>
-            <Link className="dui-nav-sch-act__cart_lst-btn dui-link" to="/cart">
-              <div className="dui-util-clr-prim-p2">
-                <ShoppingCartSVG />
-                <p className="dui-util-fw-bld dui-primary-color-p2">Cart</p>
-              </div>
-            </Link>
+              My Playlists
+            </button>
           </li>
         )}
 
@@ -133,9 +98,9 @@ export default function Navbar() {
               });
             }}
           >
-            {/* {theme.currentTheme === "dark" && <SunSVG></SunSVG>}
+            {theme.currentTheme === "dark" && <SunSVG></SunSVG>}
 
-            {theme.currentTheme === "light" && <MoonSVG></MoonSVG>} */}
+            {theme.currentTheme === "light" && <MoonSVG></MoonSVG>}
           </button>
         </li>
       </ul>

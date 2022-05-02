@@ -50,7 +50,7 @@ export default function SiginUpPage() {
                     res: res,
                     err: null,
                   }));
-                  // navigate("/"); // varundev: needs to fix
+                  navigate("/");
                 } catch (err) {
                   console.log(err);
                   setApiResponse((apiResponse) => ({

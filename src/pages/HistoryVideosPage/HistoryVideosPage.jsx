@@ -1,16 +1,23 @@
 import React from "react";
-import styles from "./videoListingPage.module.css";
+import styles from "./historyVideosPage.module.css";
 
 import { Card, Navbar, Sidebar } from "../../components";
-import { useAuth, useLikes, useVideos, useWatchLater } from "../../contexts";
+import {
+  useAuth,
+  useHistory,
+  useLikes,
+  useVideos,
+  useWatchLater,
+} from "../../contexts";
 import { useAxios } from "../../customHooks";
 import { useEffect } from "react";
-import { getItemCardData } from "./videoListingPageUtils";
+import { getItemCardData, deleteAllHistory } from "./historyVideosPageUtils";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
-export default function VideoListingPage() {
+export default function HistoryVideosPage() {
   const { likesState, setLikesState } = useLikes();
+  const { historyState, setHistoryState } = useHistory();
   const { videosState, setVideosState } = useVideos();
   const { watchLaterState, setWatchLaterState } = useWatchLater();
   const { authState, checkValidTokenAndSetAuth } = useAuth();
@@ -39,6 +46,23 @@ export default function VideoListingPage() {
         data: likesResponse,
       });
     }, [likesResponse, likesLoading, likesError]);
+
+    const {
+      response: historyResponse,
+      loading: historyLoading,
+      error: historyError,
+    } = useAxios({
+      method: "GET",
+      url: "/api/user/history",
+      headers: config.headers,
+    });
+
+    useEffect(() => {
+      setHistoryState({
+        type: "INIT_HISTORY",
+        data: historyResponse,
+      });
+    }, [historyResponse, historyLoading, historyError]);
   }
 
   const { response, loading, error } = useAxios({
@@ -75,6 +99,14 @@ export default function VideoListingPage() {
     });
   }, [categoryResponse, categoryLoading, categoryError]);
 
+  const historyVideoIds = historyState.history.reduce((acc, cur) => {
+    return [...acc, cur._id];
+  }, []);
+
+  const historyVideos = videosState.videos.filter((v) => {
+    return historyVideoIds.find((e) => e === v._id) !== undefined;
+  });
+
   return (
     <section className={`${styles[`page-wrap`]}`}>
       <section className={`${styles[`page-nav`]}`}>
@@ -84,41 +116,27 @@ export default function VideoListingPage() {
         <Sidebar></Sidebar>
       </section>
       <section className={`${styles["page-main"]}`}>
-        <div className={`${styles["category-list-holder"]}`}>
-          {videosState.categories.map((category) => {
-            const btnStyle = category.isSelected
-              ? "dui-btn--primary"
-              : "dui-btn--secondary";
-            return (
-              <button
-                key={category._id}
-                className={`${
-                  styles[`category-btn`]
-                } dui-btn ${btnStyle} dui-util-txt-sm dui-util-spc-pad-0_8rem-xs  dui-util-bdr-radi-999px-mx reset-button-inherit-parent`}
-                onClick={() => {
-                  setVideosState({
-                    type: "FILTER_BY_CATEGORY",
-                    data: { categoryId: category._id },
-                  });
-                }}
-              >
-                {category.categoryName}
-              </button>
-            );
-          })}
-        </div>
         <p className={`dui-util-txt-reg dui-primary-color-p2`}>
-          Video ({videosState.videosToShow.length})
+          History ({historyVideos.length})
         </p>
+        <button
+          className={`${styles["btn-clear-history"]} dui-btn dui-btn--primary dui-util-bdr-radi-5px-s dui-util-txt-sm dui-util-spc-pad-0_8rem-xs reset-button-inherit-parent`}
+          onClick={() => {
+            console.log("ff");
+            deleteAllHistory(setHistoryState);
+          }}
+        >
+          Clear All History
+        </button>
         <div className={`${styles["video-list-holder"]}`}>
-          {videosState.videosToShow.map((videoDetails) => {
+          {historyVideos.map((videoDetails) => {
             return (
               <Card
                 key={videoDetails._id}
                 itemCardData={getItemCardData({
                   videoDetails,
-                  watchLaterState,
-                  setWatchLaterState,
+                  historyState,
+                  setHistoryState,
                   likesState,
                   setLikesState,
                 })}

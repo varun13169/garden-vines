@@ -6,56 +6,62 @@
 export const videos = [
   {
     _id: "Wo5dMEP_BbI",
-    title: "Awesome Video about Coding",
+    title: "A beautiful waterfall and duck lake ",
     thumbnail:
       "https://res.cloudinary.com/duepvqb5b/image/upload/v1648206129/gardenkart-products/products/annie-spratt-vsnISjCT2hY-unsplash_vz0tt4.jpg",
-    description:
-      "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.",
+    src: "https://www.youtube.com/embed/qH-c7NJRAco",
+    description: "Garden Decoration",
     creator: "Soham Shah",
+    categoryId: "category2",
   },
   {
     _id: "F_Riqjdh2oM",
-    title: "Neural Networks from Scratch - P.1 Intro and Neuron Code",
+    title: "Landscape Design Ideas",
     thumbnail:
       "https://res.cloudinary.com/duepvqb5b/image/upload/v1648206129/gardenkart-products/products/annie-spratt-vsnISjCT2hY-unsplash_vz0tt4.jpg",
+    src: "https://www.youtube.com/embed/rkfr4VatFs8",
     creator: "Sentdex",
-    description:
-      "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.",
+    description: "Contemporary Garden Designs",
+    categoryId: "category3",
   },
   {
     _id: "F_Riqjdh2oN",
-    title: "Neural Networks from Scratch - P.1 Intro and Neuron Code",
+    title: "Small balcony makeover",
     thumbnail:
       "https://res.cloudinary.com/duepvqb5b/image/upload/v1648206129/gardenkart-products/products/annie-spratt-vsnISjCT2hY-unsplash_vz0tt4.jpg",
+    src: "https://www.youtube.com/embed/urpqClU-7qc",
     creator: "Sentdex",
-    description:
-      "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.",
+    description: "Zen corner | balcony organisation",
+    categoryId: "category2",
   },
   {
     _id: "F_Riqjdh2oO",
-    title: "Neural Networks from Scratch - P.1 Intro and Neuron Code",
+    title: "Balcony Garden",
     thumbnail:
       "https://res.cloudinary.com/duepvqb5b/image/upload/v1648206129/gardenkart-products/products/annie-spratt-vsnISjCT2hY-unsplash_vz0tt4.jpg",
+    src: "https://www.youtube.com/embed/yGf9PBa79V4",
     creator: "Sentdex",
-    description:
-      "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.",
+    description: "balcony organisation",
+    categoryId: "category4",
   },
   {
     _id: "F_Riqjdh2oP",
-    title: "Neural Networks from Scratch - P.1 Intro and Neuron Code",
+    title: "DIY vertical hanging garden ",
     thumbnail:
       "https://res.cloudinary.com/duepvqb5b/image/upload/v1648206129/gardenkart-products/products/annie-spratt-vsnISjCT2hY-unsplash_vz0tt4.jpg",
+    src: "https://www.youtube.com/embed/smcByjzCKk8",
     creator: "Sentdex",
-    description:
-      "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.",
+    description: "growing Portulaca (Mossrose)",
+    categoryId: "category1",
   },
   {
     _id: "F_Riqjdh2oQ",
-    title: "Neural Networks from Scratch - P.1 Intro and Neuron Code",
+    title: "Amazing Vertical Garden",
     thumbnail:
       "https://res.cloudinary.com/duepvqb5b/image/upload/v1648206129/gardenkart-products/products/annie-spratt-vsnISjCT2hY-unsplash_vz0tt4.jpg",
+    src: "https://www.youtube.com/embed/DgHvEUfCAEU",
     creator: "Sentdex",
-    description:
-      "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.",
+    description: " Using Plastic Bottles",
+    categoryId: "category2",
   },
 ];

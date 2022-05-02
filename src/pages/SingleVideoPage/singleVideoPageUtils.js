@@ -1,5 +1,84 @@
 import axios from "axios";
-import { useAxios } from "../../customHooks";
+
+const removeFromLikedVideosAndSetLikedState = ({
+  videoDetails,
+  likesState,
+  setLikesState,
+}) => {
+  setLikesState({
+    type: "UPDATE_LIKES_LIST",
+    data: {
+      likes: likesState.likes.filter((e) => {
+        return e._id !== videoDetails._id;
+      }),
+    },
+  });
+
+  let config = {
+    headers: {
+      Accept: "*/*",
+      authorization: localStorage.getItem("token"),
+    },
+  };
+  (async () => {
+    try {
+      let res = await axios.delete(
+        "/api/user/likes/" + videoDetails._id,
+        config
+      );
+      // TODO: base on update API
+      // setWishlist((wishlist) => res.data.wishlist);
+    } catch (err) {
+      console.log(err);
+    }
+  })();
+};
+
+const removeFromLikedVideos = ({ likesState, setLikesState }) => {
+  return (videoDetails) => {
+    removeFromLikedVideosAndSetLikedState({
+      videoDetails,
+      likesState,
+      setLikesState,
+    });
+  };
+};
+
+const addToLikedVideosAndSetLikedState = ({
+  itemDetails,
+  likesState,
+  setLikesState,
+}) => {
+  setLikesState({
+    type: "UPDATE_LIKES_LIST",
+    data: {
+      likes: [...likesState.likes, itemDetails],
+    },
+  });
+
+  let config = {
+    headers: {
+      Accept: "*/*",
+      authorization: localStorage.getItem("token"),
+    },
+  };
+  let payload = { video: itemDetails };
+  (async () => {
+    let res = await axios.post("/api/user/likes", payload, config);
+    // TODO: base on update API
+    // setWishlist((wishlist) => res.data.wishlist);
+  })();
+};
+
+const addToLikedVideos = ({ likesState, setLikesState }) => {
+  return (itemDetails) => {
+    addToLikedVideosAndSetLikedState({
+      itemDetails,
+      likesState,
+      setLikesState,
+    });
+  };
+};
 
 /**
  * Remove From Wishlist And Set Wishlist
@@ -103,19 +182,15 @@ const addToWatchLater = ({ watchLaterState, setWatchLaterState }) => {
   };
 };
 
-/**
- * Add To Liked And Set LikedState
- * @param {Object} Object
- */
-const addToLikedVideosAndSetLikedState = ({
+const addToHistoryVideosAndSetHistoryState = ({
   itemDetails,
-  likesState,
-  setLikesState,
+  historyState,
+  setHistoryState,
 }) => {
   setLikesState({
-    type: "UPDATE_LIKES_LIST",
+    type: "UPDATE_HISTORY",
     data: {
-      likes: [...likesState.likes, itemDetails],
+      history: [...historyState.history, itemDetails],
     },
   });
 
@@ -127,67 +202,21 @@ const addToLikedVideosAndSetLikedState = ({
   };
   let payload = { video: itemDetails };
   (async () => {
-    let res = await axios.post("/api/user/likes", payload, config);
+    let res = await axios.post("/api/user/history", payload, config);
     // TODO: base on update API
     // setWishlist((wishlist) => res.data.wishlist);
   })();
 };
 
-const addToLikedVideos = ({ likesState, setLikesState }) => {
+const addToHistoryVideos = ({ historyState, setHistoryState }) => {
   return (itemDetails) => {
-    addToLikedVideosAndSetLikedState({
+    addToHistoryVideosAndSetHistoryState({
       itemDetails,
-      likesState,
-      setLikesState,
+      historyState,
+      setHistoryState,
     });
   };
 };
-
-//
-const removeFromLikedVideosAndSetLikedState = ({
-  videoDetails,
-  likesState,
-  setLikesState,
-}) => {
-  setLikesState({
-    type: "UPDATE_LIKES_LIST",
-    data: {
-      likes: likesState.likes.filter((e) => {
-        return e._id !== videoDetails._id;
-      }),
-    },
-  });
-
-  let config = {
-    headers: {
-      Accept: "*/*",
-      authorization: localStorage.getItem("token"),
-    },
-  };
-  (async () => {
-    try {
-      let res = await axios.delete(
-        "/api/user/likes/" + videoDetails._id,
-        config
-      );
-      // TODO: base on update API
-      // setWishlist((wishlist) => res.data.wishlist);
-    } catch (err) {
-      console.log(err);
-    }
-  })();
-};
-
-const removeFromLikedVideos = ({ likesState, setLikesState }) => {
-  return (videoDetails) => {
-    removeFromLikedVideosAndSetLikedState({
-      videoDetails,
-      likesState,
-      setLikesState,
-    });
-  };
-};
-//
 
 const getItemCardData = ({
   videoDetails,
@@ -231,4 +260,12 @@ const getItemCardData = ({
   return res;
 };
 
-export { getItemCardData };
+export {
+  addToWatchLater,
+  removeFromWatchLater,
+  addToLikedVideos,
+  removeFromLikedVideos,
+  addToHistoryVideosAndSetHistoryState,
+  addToHistoryVideos,
+  getItemCardData,
+};

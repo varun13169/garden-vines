@@ -11,6 +11,12 @@ import {
   usePlaylist,
   PlaylistContextProvider,
 } from "./playlistsContext/playlistsContext";
+import { useLikes, LikesContextProvider } from "./likesContext/likesContext";
+import {
+  useHistory,
+  HistorContextProvider,
+} from "./historyContext/historyContext";
+import { ThemeContextProvider, useTheme } from "./themeContext/themeContext";
 
 export {
   VideosContextProvider,
@@ -21,4 +27,10 @@ export {
   useAuth,
   PlaylistContextProvider,
   usePlaylist,
+  useLikes,
+  LikesContextProvider,
+  useHistory,
+  HistorContextProvider,
+  useTheme,
+  ThemeContextProvider,
 };

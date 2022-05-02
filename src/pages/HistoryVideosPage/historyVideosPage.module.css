@@ -36,6 +36,10 @@
 .page-main {
   grid-area: p_content;
   overflow: auto;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .video-list-holder {
@@ -62,4 +66,9 @@
 
 .category-btn {
   margin: 0rem 2rem;
+}
+
+.btn-clear-history {
+  align-self: end;
+  margin-right: 3rem;
 }

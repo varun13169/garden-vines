@@ -2,6 +2,7 @@
   width: 30rem;
   height: fit-content;
   /* max-width: 40rem; */
+  margin: auto;
 
   grid-auto-columns: 4fr 4fr;
   grid-template-areas:
@@ -73,4 +74,16 @@
   /* height: 24.4rem; */
   align-items: center;
   margin: auto;
+  pointer-events: none;
+}
+
+.dui-card-prod-hzntl__buttons {
+  flex-direction: row;
+}
+
+.dui-card-prod-hzntl__buttons > .primary-action-btn {
+  width: 85%;
+}
+.dui-card-prod-hzntl__buttons > .secondary-action-btn {
+  margin-left: auto;
 }

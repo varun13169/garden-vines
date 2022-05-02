@@ -1,38 +1,47 @@
 import "./card.css";
 import { BinSVG, WishlistHeartSVG } from "../../assets/svgReactComponents";
-import { Link, useLocation } from "react-router-dom";
-import { useWatchLater } from "../../contexts";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useAuth, useLikes, useWatchLater } from "../../contexts";
+import LikeSVG from "../../assets/svgReactComponents/LikeSVG";
 
 export default function Card({ itemCardData }) {
   itemCardData = {
     ...itemCardData,
     secAction: () => {},
-    wishlistAction: () => {},
   };
 
-  const { videoDetails, priAction, secAction, wishlistAction } = itemCardData;
+  const { videoDetails, priAction, secAction, likeAction } = itemCardData;
 
   const cart = [];
-  const wishlist = [];
+  const { likesState, setLikesState } = useLikes();
+  const { authState, checkValidTokenAndSetAuth } = useAuth();
+  const { isSignnedIn } = authState;
+  const navigate = useNavigate();
 
-  const { _id, title, thumbnail, description } = videoDetails;
-
-  const isProductInCart =
-    cart.filter((cartProduct) => {
-      return videoDetails._id === cartProduct._id;
-    }).length !== 0;
-
-  const isProductInWishlist =
-    wishlist.filter((wishlistProduct) => {
-      return videoDetails._id === wishlistProduct._id;
-    }).length !== 0;
+  const { _id, title, thumbnail, src, description } = videoDetails;
+  console.log("Card");
+  console.log(videoDetails);
 
   const { pathname } = useLocation();
 
   return (
     <div className="dui-card-prod-hzntl dui-util-bdr-radi-5px-s dui-util-gry-shdw dui-util-pos-rel">
       <div className="dui-card-prod-hzntl__img-container">
-        <img className="dui-card-prod-hzntl__img" src={thumbnail} alt="" />
+        {/* <img className="dui-card-prod-hzntl__img" src={thumbnail} alt="" /> */}
+        <Link
+          className={`dui-link`}
+          to={`/video/${_id}`}
+          style={{ width: "fit-content", height: "fit-content" }}
+        >
+          <iframe
+            className="dui-card-prod-hzntl__img"
+            src={src}
+            title="YouTube video player"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          ></iframe>
+        </Link>
       </div>
 
       <div className="dui-card-prod-hzntl__info">
@@ -65,52 +74,49 @@ export default function Card({ itemCardData }) {
 
       <div className="dui-card-prod-hzntl__actions">
         <div className="dui-card-prod-hzntl__buttons">
-          {pathname === "/videos" && (
+          {(pathname === "/" ||
+            pathname === "/liked" ||
+            pathname === "/history" ||
+            pathname === "/playlists" ||
+            pathname === "/watch-later") && (
             <button
-              className="product-card-btn dui-btn dui-btn--primary dui-util-txt-sm dui-util-spc-pad-0_8rem-xs reset-button-inherit-parent"
-              onClick={() => priAction.action(videoDetails)}
+              className="primary-action-btn dui-btn dui-btn--primary dui-util-txt-sm dui-util-spc-pad-0_8rem-xs reset-button-inherit-parent"
+              onClick={() => {
+                isSignnedIn
+                  ? priAction.action(videoDetails)
+                  : navigate("/signin");
+              }}
             >
               {priAction.name}
             </button>
           )}
-          {pathname === "/products" && isProductInCart && (
-            <Link
-              to={priAction.toPath}
-              className="product-card-link dui-link dui-link--primary dui-util-txt-sm dui-util-spc-pad-xs dui-util-txt-align-cent"
-            >
-              {priAction.name}
-            </Link>
-          )}
-          {(pathname === "/cart" ||
-            (pathname === "/wishlist" && isProductInCart)) && (
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-              }}
-            >
-              <button
-                className="product-card-btn dui-btn dui-btn--primary dui-util-txt-md dui-util-spc-pad reset-button-inherit-parent"
-                style={{ flexGrow: "1" }}
-                onClick={() => priAction.cartActions.decrement(itemDetails)}
-                disabled={
-                  (qty ?? cart.filter((cp) => cp._id === _id)[0].qty) === 1
-                }
-              >
-                -
-              </button>
-              <p className="dui-util-txt-align-cent" style={{ flexGrow: "1" }}>
-                {qty ?? cart.filter((cp) => cp._id === _id)[0].qty}
-              </p>
-              <button
-                className="product-card-btn dui-btn dui-btn--primary dui-util-txt-md dui-util-spc-pad-0_8re-xs reset-button-inherit-parent"
-                style={{ flexGrow: "1" }}
-                onClick={() => priAction.cartActions.increment(itemDetails)}
-              >
-                +
-              </button>
-            </div>
-          )}
+          <button
+            className="secondary-action-btn dui-btn dui-util-bdr-radi-999px-mx reset-button-inherit-parent"
+            onClick={() => {
+              isSignnedIn
+                ? likeAction.action(videoDetails)
+                : navigate("/signin");
+            }}
+          >
+            {likeAction.isInLikedVideos && (
+              <LikeSVG
+                height="3rem"
+                width="3rem"
+                strokeWidth="1.5"
+                fill="#F34E4E"
+                stroke="#F34E4E"
+              ></LikeSVG>
+            )}
+            {!likeAction.isInLikedVideos && (
+              <LikeSVG
+                height="3rem"
+                width="3rem"
+                strokeWidth="1.5"
+                fill="none"
+                stroke="#F34E4E"
+              ></LikeSVG>
+            )}
+          </button>
           {/* <button
             className="product-card-btn dui-btn dui-btn--secondary dui-util-txt-sm dui-util-spc-pad-0_8rem-xs reset-button-inherit-parent"
             onClick={() => secAction.action(itemDetails)}
@@ -121,11 +127,12 @@ export default function Card({ itemCardData }) {
       </div>
 
       {/* <!-- Button Component Starts -- Icon --> */}
-      <button
+
+      {/* <button
         className="dui-card-prod-hzntl__wishlist-btn dui-btn dui-util-bdr-radi-999px-mx reset-button-inherit-parent"
-        onClick={() => wishlistAction.action(itemDetails)}
+        onClick={() => likeAction.action(videoDetails)}
       >
-        {wishlistAction.isProductInWishlist && (
+        {likeAction.isInLikedVideos && (
           <WishlistHeartSVG
             className="dui-card-prod-hzntl__wishlist-btn_svg dui-util-spc-pad-0_8rem-xs"
             height="1rem"
@@ -136,7 +143,7 @@ export default function Card({ itemCardData }) {
             strokeLinejoin="round"
           ></WishlistHeartSVG>
         )}
-        {!wishlistAction.isProductInWishlist && (
+        {!likeAction.isInLikedVideos && (
           <WishlistHeartSVG
             className="dui-card-prod-hzntl__wishlist-btn_svg dui-util-spc-pad-0_8rem-xs"
             height="1rem"
@@ -147,8 +154,8 @@ export default function Card({ itemCardData }) {
             strokeLinecap="round"
             strokeLinejoin="round"
           ></WishlistHeartSVG>
-        )}
-      </button>
+        )} 
+      </button>*/}
       {/* <!-- Button Component Ends -- Icon --> */}
     </div>
   );

@@ -27,6 +27,12 @@ const PlaylistContextProvider = ({ children }) => {
             return playlist._id !== playlistId;
           }),
         };
+
+      case "UPDATE_PLAYLIST":
+        console.log("varundev: UPDATE_PLAYLIST");
+        console.log(action.data);
+        return action.data;
+
       default:
         console.log("Default");
     }

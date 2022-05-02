@@ -1,10 +1,13 @@
 import { Route, Routes } from "react-router-dom";
 import {
+  HistoryVideosPage,
   Homepage,
+  LikedVideosPage,
   PlaylistPage,
   SignInPage,
   SignOutPage,
   SignUpPage,
+  SingleVideoPage,
   VideoListingPage,
   WatchLaterPage,
 } from "./pages";
@@ -12,15 +15,35 @@ import {
 import MockAPI from "./mockman/MockAPI";
 import "./styles.css";
 import { RequiresAuth } from "./components";
-import { useAuth } from "./contexts";
+import { initTheme } from "./utils";
+import { useTheme } from "./contexts";
 
 export default function App() {
+  const { theme, setTheme } = useTheme();
+
   return (
-    <div className="App">
+    <div className={"App   " + initTheme(theme)}>
       <Routes>
-        <Route path="/" element={<Homepage />}></Route>
-        <Route path="/watch-later" element={<WatchLaterPage />}></Route>
+        <Route path="/" element={<VideoListingPage />}></Route>
         <Route path="/videos" element={<VideoListingPage />}></Route>
+
+        <Route
+          path="/history"
+          element={
+            <RequiresAuth>
+              <HistoryVideosPage />
+            </RequiresAuth>
+          }
+        ></Route>
+
+        <Route
+          path="/watch-later"
+          element={
+            <RequiresAuth>
+              <WatchLaterPage />
+            </RequiresAuth>
+          }
+        ></Route>
 
         <Route
           path="/playlists"
@@ -30,6 +53,17 @@ export default function App() {
             </RequiresAuth>
           }
         ></Route>
+
+        <Route
+          path="/liked"
+          element={
+            <RequiresAuth>
+              <LikedVideosPage />
+            </RequiresAuth>
+          }
+        ></Route>
+
+        <Route path="/video/:id" element={<SingleVideoPage />}></Route>
 
         <Route path="/signin" element={<SignInPage />}></Route>
         <Route path="/signup" element={<SignUpPage />}></Route>

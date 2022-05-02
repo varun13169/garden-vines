@@ -1,0 +1,28 @@
+.sidebar-holder {
+  width: 100%;
+  height: 100%;
+  padding: 2rem;
+
+  background-color: var(--dui-light-theme-bg);
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-link-list {
+  text-decoration: none;
+  list-style: none;
+}
+
+.sidebar-link {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: left;
+  margin: 2rem 0rem;
+}
+
+.sidebar-link-icons {
+  width: 3rem;
+  height: 3rem;
+  margin: 0rem 1rem 0rem 0rem;
+}
