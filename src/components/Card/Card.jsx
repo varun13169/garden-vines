@@ -19,8 +19,6 @@ export default function Card({ itemCardData }) {
   const navigate = useNavigate();
 
   const { _id, title, thumbnail, src, description } = videoDetails;
-  console.log("Card");
-  console.log(videoDetails);
 
   const { pathname } = useLocation();
 

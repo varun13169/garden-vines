@@ -12,9 +12,6 @@ const ThemeContextProvider = ({ children }) => {
   });
 
   const setTheme = (updatedTheme) => {
-    // updatedTheme is a new object
-    console.log(updatedTheme);
-
     localStorage.setItem("currentTheme", updatedTheme.currentTheme);
 
     setThemeState(() => {

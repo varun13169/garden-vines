@@ -21,7 +21,6 @@ const onSubmitAddToPlaylistForm = (
       ...playlistsState,
       playlists: playlistsState.playlists.map((pl) => {
         if (pl._id === playlistId) {
-          console.log(pl);
           if (
             pl.videos.filter((v) => dispAddToPlaylistFormState._id === v._id)
               .length === 0

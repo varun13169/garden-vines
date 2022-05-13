@@ -98,9 +98,6 @@ const removeVideoFromPlaylistAndSetPlaylistsState = ({
   playlistsState,
   setPlaylistsState,
 }) => {
-  console.log("playlistsState");
-  console.log(playlistsState);
-
   setPlaylistsState({
     type: "UPDATE_PLAYLIST",
     data: {

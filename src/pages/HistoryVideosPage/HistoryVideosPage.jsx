@@ -122,7 +122,6 @@ export default function HistoryVideosPage() {
         <button
           className={`${styles["btn-clear-history"]} dui-btn dui-btn--primary dui-util-bdr-radi-5px-s dui-util-txt-sm dui-util-spc-pad-0_8rem-xs reset-button-inherit-parent`}
           onClick={() => {
-            console.log("ff");
             deleteAllHistory(setHistoryState);
           }}
         >

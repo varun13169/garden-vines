@@ -159,8 +159,6 @@ export default function LikedVideosPage() {
             </p>
 
             {playlistsState.playlists.map((pl) => {
-              console.log(pl);
-
               return (
                 <label
                   htmlFor={pl._id}

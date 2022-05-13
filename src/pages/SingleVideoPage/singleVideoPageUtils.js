@@ -162,7 +162,7 @@ const addToWatchLaterAndSetWatchLater = ({
         return { watchLater: res.data.watchlater };
       });
     } catch (err) {
-      console.log(error);
+      console.log(err);
     }
   })();
 };
