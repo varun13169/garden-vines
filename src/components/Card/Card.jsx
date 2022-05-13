@@ -25,7 +25,6 @@ export default function Card({ itemCardData }) {
   return (
     <div className="dui-card-prod-hzntl dui-util-bdr-radi-5px-s dui-util-gry-shdw dui-util-pos-rel">
       <div className="dui-card-prod-hzntl__img-container">
-        {/* <img className="dui-card-prod-hzntl__img" src={thumbnail} alt="" /> */}
         <Link
           className={`dui-link`}
           to={`/video/${_id}`}
@@ -43,7 +42,6 @@ export default function Card({ itemCardData }) {
       </div>
 
       <div className="dui-card-prod-hzntl__info">
-        {/* <p className="dui-card-prod-hzntl__secondary-text">{productName}</p> */}
         <h3
           className="dui-card-prod-hzntl__primary-text dui-util-fw-blk dui-util-txt-align-left"
           style={{
@@ -65,9 +63,6 @@ export default function Card({ itemCardData }) {
         >
           {description}
         </p>
-        {/* <p className="dui-card-prod-hzntl__secondary-text dui-util-txt-sm dui-util-spc-pad-0_8rem-xs dui-util-fw-sbld">
-          {discountedPctage}% OFF
-        </p> */}
       </div>
 
       <div className="dui-card-prod-hzntl__actions">
@@ -123,38 +118,6 @@ export default function Card({ itemCardData }) {
           </button> */}
         </div>
       </div>
-
-      {/* <!-- Button Component Starts -- Icon --> */}
-
-      {/* <button
-        className="dui-card-prod-hzntl__wishlist-btn dui-btn dui-util-bdr-radi-999px-mx reset-button-inherit-parent"
-        onClick={() => likeAction.action(videoDetails)}
-      >
-        {likeAction.isInLikedVideos && (
-          <WishlistHeartSVG
-            className="dui-card-prod-hzntl__wishlist-btn_svg dui-util-spc-pad-0_8rem-xs"
-            height="1rem"
-            width="1rem"
-            strokeWidth="1.5"
-            fill="#F34E4E"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          ></WishlistHeartSVG>
-        )}
-        {!likeAction.isInLikedVideos && (
-          <WishlistHeartSVG
-            className="dui-card-prod-hzntl__wishlist-btn_svg dui-util-spc-pad-0_8rem-xs"
-            height="1rem"
-            width="1rem"
-            strokeWidth="1.5"
-            fill="none"
-            stroke="#F34E4E"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          ></WishlistHeartSVG>
-        )} 
-      </button>*/}
-      {/* <!-- Button Component Ends -- Icon --> */}
     </div>
   );
 }

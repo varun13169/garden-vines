@@ -2,7 +2,7 @@ import React from "react";
 import { WatchLaterSVG } from "../../assets/svgReactComponents";
 import LikeSVG from "../../assets/svgReactComponents/LikeSVG";
 import { Card, Navbar, Sidebar } from "../../components";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import styles from "./singleVideoPage.module.css";
 import {
@@ -30,6 +30,7 @@ export default function SingleVideoPage() {
   const { likesState, setLikesState } = useLikes();
   const { watchLaterState, setWatchLaterState } = useWatchLater();
   const { authState, checkValidTokenAndSetAuth } = useAuth();
+  const navigate = useNavigate();
 
   const { response, loading, error } = useAxios({
     method: "GET",
@@ -150,16 +151,20 @@ export default function SingleVideoPage() {
                 styles[`option-button`]
               } reset-button-inherit-parent`}
               onClick={() => {
-                const videoDetails = videosState.videos.find(
-                  (video) => video._id === id
-                );
-                isInLikedVideos
-                  ? removeFromLikedVideos({ likesState, setLikesState })(
-                      videoDetails
-                    )
-                  : addToLikedVideos({ likesState, setLikesState })(
-                      videoDetails
-                    );
+                if (authState.isSignnedIn) {
+                  const videoDetails = videosState.videos.find(
+                    (video) => video._id === id
+                  );
+                  isInLikedVideos
+                    ? removeFromLikedVideos({ likesState, setLikesState })(
+                        videoDetails
+                      )
+                    : addToLikedVideos({ likesState, setLikesState })(
+                        videoDetails
+                      );
+                } else {
+                  navigate("/signin");
+                }
               }}
             >
               <LikeSVG className={`${styles[`option-img`]}`}></LikeSVG>
@@ -173,17 +178,21 @@ export default function SingleVideoPage() {
                 styles[`option-button`]
               } reset-button-inherit-parent`}
               onClick={() => {
-                const videoDetails = videosState.videos.find(
-                  (video) => video._id === id
-                );
-                isVideoInWatchLater
-                  ? removeFromWatchLater({
-                      watchLaterState,
-                      setWatchLaterState,
-                    })(videoDetails)
-                  : addToWatchLater({ watchLaterState, setWatchLaterState })(
-                      videoDetails
-                    );
+                if (authState.isSignnedIn) {
+                  const videoDetails = videosState.videos.find(
+                    (video) => video._id === id
+                  );
+                  isVideoInWatchLater
+                    ? removeFromWatchLater({
+                        watchLaterState,
+                        setWatchLaterState,
+                      })(videoDetails)
+                    : addToWatchLater({ watchLaterState, setWatchLaterState })(
+                        videoDetails
+                      );
+                } else {
+                  navigate("/signin");
+                }
               }}
             >
               <WatchLaterSVG
