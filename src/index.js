@@ -9,11 +9,12 @@ import {
   HistorContextProvider,
   LikesContextProvider,
   PlaylistContextProvider,
-  ThemeContextProvider,
   VideosContextProvider,
   WatchLaterContextProvider,
 } from "./contexts";
-import axios from "axios";
+import { Provider } from "react-redux";
+import { store } from "./app/store";
+
 // Call make Server
 makeServer();
 
@@ -39,7 +40,7 @@ const rootElement = document.getElementById("root");
 ReactDOM.render(
   <StrictMode>
     <BrowserRouter>
-      <ThemeContextProvider>
+      <Provider store={store}>
         <AuthContextProvider>
           <PlaylistContextProvider>
             <VideosContextProvider>
@@ -53,7 +54,7 @@ ReactDOM.render(
             </VideosContextProvider>
           </PlaylistContextProvider>
         </AuthContextProvider>
-      </ThemeContextProvider>
+      </Provider>
     </BrowserRouter>
   </StrictMode>,
   rootElement
