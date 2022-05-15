@@ -123,8 +123,8 @@ const removeVideoFromPlaylistAndSetPlaylistsState = ({
 
   (async () => {
     try {
-      let res = await axios.post(
-        `/api/user/playlists/${playlistDetails._id}/${videoDetails._id}`,
+      let res = await axios.delete(
+        "/api/user/playlists/" + playlistDetails._id + "/" + videoDetails._id,
         config
       );
       // TODO: base on update API
