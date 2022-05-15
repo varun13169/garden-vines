@@ -78,5 +78,11 @@
   border-radius: 5px;
 }
 .focused-playlist {
-  border: 1px solid red;
+  border: 1px solid var(--dui-primary-color);
+}
+
+@media only screen and (max-width: 855px) {
+  .page-wrap {
+    grid-auto-rows: 15rem auto auto 7.5rem;
+  }
 }

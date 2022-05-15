@@ -77,3 +77,9 @@
   display: flex;
   flex-direction: column;
 }
+
+@media only screen and (max-width: 855px) {
+  .page-wrap {
+    grid-auto-rows: 15rem auto auto 7.5rem;
+  }
+}
