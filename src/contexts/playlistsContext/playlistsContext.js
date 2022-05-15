@@ -35,6 +35,7 @@ const PlaylistContextProvider = ({ children }) => {
 
       default:
         console.log("Default");
+        return { ...state };
     }
   };
   const [playlistsState, setPlaylistsState] = useReducer(reducer, {

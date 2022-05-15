@@ -58,7 +58,7 @@ export default function Navbar() {
                 {/* <!-- SignUp Button --> */}
                 <Link
                   className="dui-nav-sch-act__signup-btn dui-link dui-link--primary dui-util-txt-sm dui-util-spc-pad-0_8rem-xs dui-util-fw-bld"
-                  to="/playlist"
+                  to="/signup"
                 >
                   Sign Up
                 </Link>
@@ -66,7 +66,7 @@ export default function Navbar() {
                 {/* <!-- Login Button --> */}
                 <Link
                   className="dui-nav-sch-act__login-btn dui-link dui-link--primary dui-util-txt-sm dui-util-spc-pad-0_8rem-xs dui-util-fw-bld"
-                  to="/sign-in"
+                  to="/signin"
                 >
                   Login
                 </Link>

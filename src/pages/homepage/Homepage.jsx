@@ -29,8 +29,6 @@ export default function Homepage() {
     });
   }, [response, loading, error]);
 
-  console.log("Varun");
-  console.log(videosState.videos);
   return (
     <section className={style.pageWrap}>
       <section className={style.pageNav}>

@@ -18,7 +18,6 @@ const HistorContextProvider = ({ children }) => {
           history: [...state.history, { ...action.data.videoDetails }],
         };
       case "UPDATE_HISTORY_LIST":
-        console.log(action.data);
         return {
           ...state,
           history: action.data.history,

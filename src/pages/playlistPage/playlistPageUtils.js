@@ -98,9 +98,6 @@ const removeVideoFromPlaylistAndSetPlaylistsState = ({
   playlistsState,
   setPlaylistsState,
 }) => {
-  console.log("playlistsState");
-  console.log(playlistsState);
-
   setPlaylistsState({
     type: "UPDATE_PLAYLIST",
     data: {
@@ -109,7 +106,7 @@ const removeVideoFromPlaylistAndSetPlaylistsState = ({
         if (pl._id === playlistDetails._id) {
           return {
             ...pl,
-            videos: pl.videos.filter((v) => !(v._d === videoDetails._id)),
+            videos: pl.videos.filter((v) => v._id !== videoDetails._id),
           };
         }
         return pl;

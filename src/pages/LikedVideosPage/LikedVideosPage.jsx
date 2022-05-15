@@ -159,8 +159,6 @@ export default function LikedVideosPage() {
             </p>
 
             {playlistsState.playlists.map((pl) => {
-              console.log(pl);
-
               return (
                 <label
                   htmlFor={pl._id}
@@ -181,12 +179,18 @@ export default function LikedVideosPage() {
               );
             })}
 
-            <button
-              type="submit"
-              className={`dui-link dui-link--primary dui-util-txt-sm dui-util-spc-pad-0_8rem-xs dui-util-fw-bld reset-button-inherit-parent`}
-            >
-              Add to Playlist
-            </button>
+            {playlistsState.playlists.length !== 0 ? (
+              <button
+                type="submit"
+                className={`dui-link dui-link--primary dui-util-txt-sm dui-util-spc-pad-0_8rem-xs dui-util-fw-bld reset-button-inherit-parent`}
+              >
+                Add to Playlist
+              </button>
+            ) : (
+              <p className="dui-util-spc-pad-xs dui-util-fw-sbld">
+                Create Atleast One Playlist
+              </p>
+            )}
           </form>
         </div>
       )}

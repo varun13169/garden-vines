@@ -28,8 +28,6 @@ export default function PlaylistPage() {
   }, []);
 
   useEffect(() => {
-    console.log("ssddswedd");
-    // debugger;
     let playlistCount = playlistsState.playlists.length;
     if (playlistCount === 0) {
       setFocusedPlaylistState((focusedPlaylist) => ({
@@ -101,8 +99,6 @@ export default function PlaylistPage() {
 
         <div className={`${styles["playlist-holder"]}`}>
           {playlistsState.playlists.map((playlist) => {
-            console.log(playlist);
-            console.log(focusedPlaylistState._id === playlist._id);
             return (
               <button
                 className={`${
