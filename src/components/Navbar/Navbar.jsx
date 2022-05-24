@@ -1,12 +1,15 @@
 import "./navbar.css";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router";
-import { useAuth, useTheme } from "../../contexts";
+import { useAuth } from "../../contexts";
 import { MoonSVG, SunSVG } from "../../assets/svgReactComponents";
+import { useSelector, useDispatch } from "react-redux";
+import { setTheme } from "../../utils/ThemeSlice/themeSlice";
 
 export default function Navbar() {
   const { authState, checkValidTokenAndSetAuth } = useAuth();
-  const { theme, setTheme } = useTheme();
+  const theme = useSelector((store) => store.themeSlice);
+  const dispatch = useDispatch();
   const { isSignnedIn } = authState;
   const navigate = useNavigate();
 
@@ -92,10 +95,12 @@ export default function Navbar() {
           <button
             className="dui-nav-sch-act__drk-mode-btn dui-btn reset-button-inherit-parent"
             onClick={() => {
-              setTheme({
-                ...theme,
-                currentTheme: theme.currentTheme === "light" ? "dark" : "light",
-              });
+              dispatch(
+                setTheme({
+                  updatedTheme:
+                    theme.currentTheme === "light" ? "dark" : "light",
+                })
+              );
             }}
           >
             {theme.currentTheme === "dark" && <SunSVG></SunSVG>}

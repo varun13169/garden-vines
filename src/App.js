@@ -16,10 +16,11 @@ import MockAPI from "./mockman/MockAPI";
 import "./styles.css";
 import { RequiresAuth } from "./components";
 import { initTheme } from "./utils";
-import { useTheme } from "./contexts";
+import { useSelector } from "react-redux";
 
 export default function App() {
-  const { theme, setTheme } = useTheme();
+  const theme = useSelector((store) => store.themeSlice);
+  console.log(useSelector((store) => store.themeSlice));
 
   return (
     <div className={"App   " + initTheme(theme)}>
