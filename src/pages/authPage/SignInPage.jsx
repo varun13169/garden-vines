@@ -9,8 +9,8 @@ import styles from "./auth-page.module.css";
 
 export default function SiginInPage() {
   const [loginState, loginActionDispatch] = useReducer(signinReducer, {
-    email: "",
-    password: "",
+    email: "adarshbalika@gmail.com",
+    password: "adarshbalika",
   });
   const [apiResponse, setApiResponse] = useState({
     err: null,
@@ -60,6 +60,9 @@ export default function SiginInPage() {
             <h2 className="dui-auth-card__title dui-util-fw-bld">Sign In</h2>
             {/* <!-- Input Component Starts --> */}
             <div className="dui-inp-txt">
+              <p className="dui-util-txt-sm" style={{color: "red"}}>
+                Note: working sample credentials are<br/>pre-populated please proceed to login.
+              </p>
               <label
                 htmlFor="email-id"
                 className="dui-util-txt-sm dui-util-fw-sbld"
